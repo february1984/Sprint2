@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить метод Менеджера для хранения Задач в файле. Добавить метод Менеджера для считывания списка задач из файла.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-    </list>
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить метод для вывода всех задач. Добавить метод для удаления всех задач.&#10;fix: Исправить некорректное считывание файла" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716322887171</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: Добавить метод для вывода всех задач. Добавить метод для удаления всех задач.&#10;fix: Исправить некорректное считывание файла">
+      <option name="closed" value="true" />
+      <created>1716410956675</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716410956675</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +140,8 @@
     <MESSAGE value="feat: Добавить методы по созданию задачи и выводу ее в консоль" />
     <MESSAGE value="feat: Добавить класс для хранения задач" />
     <MESSAGE value="feat: Добавить метод Менеджера для хранения Задач в файле. Добавить метод Менеджера для считывания списка задач из файла." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить метод Менеджера для хранения Задач в файле. Добавить метод Менеджера для считывания списка задач из файла." />
+    <MESSAGE value="feat: Добавить метод для вывода всех задач. Добавить метод для удаления всех задач.&#10;fix: Исправить некорректное считывание файла" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить метод для вывода всех задач. Добавить метод для удаления всех задач.&#10;fix: Исправить некорректное считывание файла" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
