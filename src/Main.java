@@ -1,21 +1,21 @@
 import java.io.IOException;
 import java.util.HashMap;
-import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     public static void main (String[] args) throws IOException {
-        HashMap<String, Task> taskList = new HashMap<>();
+        HashMap<String, Task> taskList;
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
         Task currentTask;
-        File file = new File("TaskList.txt");
-
+        //стартовая загрузка из файла
+        taskList = Manager.loadTaskFromFile();
         while (!command.equals("E")){
             System.out.println("""
                     1 - Ввод задачи
                     2 - Вывод задачи
-                    3 - Считывание списка задач
+                    3 - Удаление всех задач
+                    4 - Вывести все задачи
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -34,9 +34,8 @@ public class Main {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "3" -> {
-                        taskList = Manager.loadTaskFromFile();
-                }
+                case "3" -> Manager.deleteAllTasks(taskList);
+                case "4" -> Manager.printAllTasks(taskList);
             }
         }
     }
