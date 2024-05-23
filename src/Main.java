@@ -12,10 +12,12 @@ public class Main {
         taskList = Manager.loadTaskFromFile();
         while (!command.equals("E")){
             System.out.println("""
-                    1 - Ввод задачи
-                    2 - Вывод задачи
-                    3 - Удаление всех задач
+                    1 - Ввести задачу
+                    2 - Показать задачу
+                    3 - Удалить все задачи
                     4 - Вывести все задачи
+                    5- Удалить задачу
+                    6- Обновить задачу
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -36,6 +38,16 @@ public class Main {
                 }
                 case "3" -> Manager.deleteAllTasks(taskList);
                 case "4" -> Manager.printAllTasks(taskList);
+                case "5" -> {
+                    System.out.println("Какую задачу хотим удалить?");
+                    String taskToDelete = scanner.nextLine();
+                    taskList = Manager.deleteTask(taskToDelete, taskList);
+                }
+                case "6" -> {
+                    System.out.println("Какую задачу хотим обновить?");
+                    String taskToUpdate = scanner.nextLine();
+                    taskList = Manager.updateTask(taskToUpdate, taskList);
+                }
             }
         }
     }
