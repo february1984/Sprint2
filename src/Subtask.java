@@ -1,7 +1,7 @@
-public class Task {
+public class Subtask extends Task {
     int id;
     String name;
     String overview;
     String status;
-    String taskType;
+    int parentID;
 }
