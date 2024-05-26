@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить метод менеджера для удаления задачи. Добавить метод менеджера для обновления задачи">
-      <change afterPath="$PROJECT_DIR$/src/Epic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Subtask.java" afterDir="false" />
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить методы Epic,Subtask&#10;feat: Добавить методы менеджера для сохранения и считывания в файл Эпиков и подзадач. Добавить методы для ввода Эпиков и подзадач.&#10;refactor: Изменить ключ для всех типов задач на уникальный ID вместо названия.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,20 +48,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
@@ -149,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716490514098</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: Добавить методы Epic,Subtask&#10;feat: Добавить методы менеджера для сохранения и считывания в файл Эпиков и подзадач. Добавить методы для ввода Эпиков и подзадач.&#10;refactor: Изменить ключ для всех типов задач на уникальный ID вместо названия.">
+      <option name="closed" value="true" />
+      <created>1716664342951</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716664342952</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,7 +181,8 @@
     <MESSAGE value="feat: Добавить метод Менеджера для хранения Задач в файле. Добавить метод Менеджера для считывания списка задач из файла." />
     <MESSAGE value="feat: Добавить метод для вывода всех задач. Добавить метод для удаления всех задач.&#10;fix: Исправить некорректное считывание файла" />
     <MESSAGE value="feat: Добавить метод менеджера для удаления задачи. Добавить метод менеджера для обновления задачи" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить метод менеджера для удаления задачи. Добавить метод менеджера для обновления задачи" />
+    <MESSAGE value="feat: Добавить методы Epic,Subtask&#10;feat: Добавить методы менеджера для сохранения и считывания в файл Эпиков и подзадач. Добавить методы для ввода Эпиков и подзадач.&#10;refactor: Изменить ключ для всех типов задач на уникальный ID вместо названия." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить методы Epic,Subtask&#10;feat: Добавить методы менеджера для сохранения и считывания в файл Эпиков и подзадач. Добавить методы для ввода Эпиков и подзадач.&#10;refactor: Изменить ключ для всех типов задач на уникальный ID вместо названия." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

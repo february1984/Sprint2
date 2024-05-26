@@ -128,39 +128,6 @@ public class Manager {
         idChanger.close();
         return taskToSet;
     }
-    public static void showTask(Task task) {
-        System.out.println(task.id + "," + task.status + "," + task.name + "," + task.overview + "," + task.taskType + "\n");
-    }
-    public static void deleteAllTasks (HashMap<Integer,Task> taskToClear) throws IOException {
-        FileWriter taskCleaner = new FileWriter("TaskList.txt");
-        taskCleaner.write("");
-        taskCleaner.close();
-        taskToClear.clear();
-    }
-    public static void printAllTasks(HashMap<Integer,Task> taskList){
-        for (Integer key : taskList.keySet()) {
-        Manager.showTask(taskList.get(key));
-        }
-    }
-    public static HashMap<Integer, Task> deleteTask (Integer taskToDelete, HashMap<Integer, Task> currentTaskList) throws IOException {
-        HashMap<Integer, Task> taskListDeleteFrom = loadTaskFromFile();
-        taskListDeleteFrom.remove(taskToDelete);
-        Manager.deleteAllTasks(currentTaskList);
-        for (Integer key : taskListDeleteFrom.keySet()) {
-            Manager.saveTaskToFile(taskListDeleteFrom.get(key));
-        }
-        return taskListDeleteFrom;
-    }
-    public static HashMap<Integer,Task> updateTask (Integer taskToUpdateName, HashMap<Integer, Task> currentTaskList) throws IOException{
-        HashMap<Integer, Task> taskListToUpdate = loadTaskFromFile();
-        Task taskToUpdate = taskListToUpdate.get(taskToUpdateName);
-        System.out.println("Что делаем теперь?");
-        taskToUpdate.overview = scanner.nextLine();
-        taskListToUpdate = deleteTask(taskToUpdateName, currentTaskList);
-        taskListToUpdate.put(taskToUpdateName, taskToUpdate);
-        Manager.saveTaskToFile(taskToUpdate);
-        return taskListToUpdate;
-    }
     public static Epic createEpic () throws IOException {
         Epic epicToSet = new Epic();
 
@@ -212,6 +179,134 @@ public class Manager {
             idChanger.write(String.valueOf(id));
             idChanger.close();
         }
-            return subtaskToSet;
+        return subtaskToSet;
+    }
+    public static void showTask(Task task) {
+        System.out.println(task.id + "," + task.status + "," + task.name + "," + task.overview + "," + task.taskType + "\n");
+    }
+    public static void showEpic(Epic epic, HashMap<Integer, Subtask> subtaskList) {
+        System.out.println(epic.id + "," + epic.status + "," + epic.name + "," + epic.overview + "," + epic.taskType);
+        for (Integer key : subtaskList.keySet()) {
+            if (subtaskList.get(key).parentID == epic.id){
+                System.out.println("\t" + subtaskList.get(key).id + "," + subtaskList.get(key).status + "," + subtaskList.get(key).name + "," + subtaskList.get(key).overview);
+            }
+        }
+    }
+    public static void deleteAllTasks (HashMap<Integer,Task> taskListToClear) throws IOException {
+        FileWriter taskCleaner = new FileWriter("TaskList.txt");
+        taskCleaner.write("");
+        taskCleaner.close();
+        taskListToClear.clear();
+    }
+    public static void deleteAllEpics (HashMap<Integer,Epic> epicListToClear, HashMap<Integer,Subtask> subtaskListToClear) throws IOException {
+        FileWriter epicCleaner = new FileWriter("EpicList.txt");
+        epicCleaner.write("");
+        epicCleaner.close();
+        epicListToClear.clear();
+        FileWriter subtaskCleaner = new FileWriter("SubtaskList.txt");
+        subtaskCleaner.write("");
+        subtaskCleaner.close();
+        subtaskListToClear.clear();
+    }
+    public static void deleteAllSubtasks (HashMap<Integer,Subtask> subtaskListToClear) throws IOException {
+        FileWriter subtaskCleaner = new FileWriter("SubtaskList.txt");
+        subtaskCleaner.write("");
+        subtaskCleaner.close();
+        subtaskListToClear.clear();
+    }
+    public static void printAllTasks(HashMap<Integer,Task> taskList){
+        for (Integer key : taskList.keySet()) {
+        Manager.showTask(taskList.get(key));
+        }
+    }
+    public static void printAllEpics(HashMap<Integer,Epic> epicList, HashMap<Integer,Subtask> subtaskList){
+        for (Integer key : epicList.keySet()) {
+            Manager.showEpic(epicList.get(key),subtaskList);
+        }
+    }
+    public static HashMap<Integer, Task> deleteTask (Integer taskToDelete,
+                                                     HashMap<Integer, Task> currentTaskList) throws IOException {
+        HashMap<Integer, Task> taskListDeleteFrom = loadTaskFromFile();
+        taskListDeleteFrom.remove(taskToDelete);
+        Manager.deleteAllTasks(currentTaskList);
+        for (Integer key : taskListDeleteFrom.keySet()) {
+            Manager.saveTaskToFile(taskListDeleteFrom.get(key));
+        }
+        return taskListDeleteFrom;
+    }
+    public static void deleteEpic (Integer epicToDelete,
+                                   HashMap<Integer, Epic> currentEpicList,
+                                   HashMap<Integer, Subtask> currentSubtaskList,
+                                   String subtaskIncluding) throws IOException {
+        HashMap<Integer, Epic> epicListDeleteFrom = loadEpicFromFile();
+        HashMap<Integer, Subtask> subtaskListDeleteFrom = loadSubtaskFromFile();
+        ArrayList<Integer> subtasksIdToDelete = new ArrayList<>();
+        if (subtaskIncluding.equals("withSubtasks")) {
+            for (Integer key : subtaskListDeleteFrom.keySet()) {
+                if (subtaskListDeleteFrom.get(key).parentID == epicToDelete) {
+                    subtasksIdToDelete.add(key);
+                }
+            }
+            for (Integer id : subtasksIdToDelete) {
+                subtaskListDeleteFrom.remove(id);
+            }
+        }
+        epicListDeleteFrom.remove(epicToDelete);
+        Manager.deleteAllEpics(currentEpicList,currentSubtaskList);
+        for (Integer key : epicListDeleteFrom.keySet()) {
+            Manager.saveEpicToFile(epicListDeleteFrom.get(key));
+        }
+        for (Integer key : subtaskListDeleteFrom.keySet()) {
+            Manager.saveSubtaskToFile(subtaskListDeleteFrom.get(key));
+        }
+    }
+    public static HashMap<Integer, Subtask> deleteSubtask (Integer subtaskToDelete,
+                                                     HashMap<Integer, Subtask> currentSubtaskList) throws IOException {
+        HashMap<Integer, Subtask> subtaskListDeleteFrom = loadSubtaskFromFile();
+        subtaskListDeleteFrom.remove(subtaskToDelete);
+        Manager.deleteAllSubtasks(currentSubtaskList);
+        for (Integer key : subtaskListDeleteFrom.keySet()) {
+            Manager.saveTaskToFile(subtaskListDeleteFrom.get(key));
+        }
+        return subtaskListDeleteFrom;
+    }
+    public static HashMap<Integer,Task> updateTask (Integer taskToUpdateID,
+                                                    HashMap<Integer, Task> currentTaskList) throws IOException{
+        HashMap<Integer, Task> taskListToUpdate = loadTaskFromFile();
+        Task taskToUpdate = taskListToUpdate.get(taskToUpdateID);
+        System.out.println("Выполнили задачу? Y/N");
+        String command = scanner.nextLine();
+        if (command.equals("Y")){
+            if (taskToUpdate.status.equals("NEW")) {
+                taskToUpdate.status = "DONE";
+                taskListToUpdate = deleteTask(taskToUpdateID, currentTaskList);
+                taskListToUpdate.put(taskToUpdateID, taskToUpdate);
+                Manager.saveTaskToFile(taskToUpdate);
+            } else {
+                System.out.println("Задача уже выполнена");
+            }
+        }
+        System.out.println("Задача изменилась?");
+        command = scanner.nextLine();
+        if (command.equals("Y")) {
+            System.out.println("Что делаем теперь?");
+            taskToUpdate.overview = scanner.nextLine();
+            taskListToUpdate = deleteTask(taskToUpdateID, currentTaskList);
+            taskListToUpdate.put(taskToUpdateID, taskToUpdate);
+            Manager.saveTaskToFile(taskToUpdate);
+        }
+        return taskListToUpdate;
+    }
+    public static HashMap<Integer,Epic> updateEpic (Integer epicToUpdateID,
+                                                    HashMap<Integer, Epic> currentEpicList,
+                                                    HashMap<Integer, Subtask> currentSubtaskList) throws IOException{
+        HashMap<Integer, Epic> epicListToUpdate = loadEpicFromFile();
+        Epic epicToUpdate = epicListToUpdate.get(epicToUpdateID);
+        System.out.println("Что делаем теперь?");
+        epicToUpdate.overview = scanner.nextLine();
+        deleteEpic(epicToUpdateID, currentEpicList, currentSubtaskList, "withoutSubtasks");
+        epicListToUpdate.put(epicToUpdateID, epicToUpdate);
+        Manager.saveEpicToFile(epicToUpdate);
+        return epicListToUpdate;
     }
 }
