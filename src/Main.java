@@ -11,6 +11,7 @@ public class Main {
         String command = "Start";
         Task currentTask;
         Epic currentEpic;
+        Subtask currentSubtask;
         //стартовая загрузка из файла
         taskList = Manager.loadTaskFromFile();
         epicList = Manager.loadEpicFromFile();
@@ -24,7 +25,7 @@ public class Main {
                     \t\t\t==================================================================================
                     Эпик\t\t|| код 8\t|| код 9\t|| код 10\t\t|| код 11\t|| код 12\t\t||  код 13 \t||
                     \t\t\t==================================================================================
-                    Подзадачу\t|| код 15\t|| ------\t|| ------\t\t|| код 18\t|| код 19\t\t||  код ?? \t||
+                    Подзадачу\t|| код 15\t|| код 16\t|| код 17\t\t|| код 18\t|| код 19\t\t||  код 20 \t||
                     \t\t\t==================================================================================
                     """);
             command = scanner.nextLine();
@@ -93,12 +94,30 @@ public class Main {
                     Manager.saveSubtaskToFile(newSubtask);
                     }
                 }
+                case "16" -> {
+                    System.out.println("Какую подзадачу хотим посмотреть?");
+                    String subtaskID = scanner.nextLine();
+                    try {
+                        currentSubtask = subtaskList.get(Integer.parseInt(subtaskID));
+                        Manager.showSubtask(currentSubtask);
+                    } catch (Exception e) {
+                        System.out.println("Такой подзадачи нет\n");
+                    }
+                }
+                case "17" -> Manager.printAllSubtasks(subtaskList);
                 case "18" -> {
                     System.out.println("Какую подзадачу хотим удалить?");
                     String subtaskToDelete = scanner.nextLine();
                     subtaskList = Manager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList);
                 }
                 case "19" -> Manager.deleteAllSubtasks(subtaskList);
+                case "20" -> {
+                    System.out.println("Какую подзадачу хотим обновить?");
+                    String subtaskToUpdate = scanner.nextLine();
+                    Manager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList);
+                    epicList = Manager.loadEpicFromFile();
+                    subtaskList = Manager.loadSubtaskFromFile();
+                }
             }
         }
     }

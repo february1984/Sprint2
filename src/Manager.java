@@ -192,6 +192,9 @@ public class Manager {
             }
         }
     }
+    public static void showSubtask(Subtask subtask) {
+        System.out.println(subtask.id + "," + subtask.status + "," + subtask.name + "," + subtask.overview + "," + subtask.taskType + "\n");
+    }
     public static void deleteAllTasks (HashMap<Integer,Task> taskListToClear) throws IOException {
         FileWriter taskCleaner = new FileWriter("TaskList.txt");
         taskCleaner.write("");
@@ -222,6 +225,11 @@ public class Manager {
     public static void printAllEpics(HashMap<Integer,Epic> epicList, HashMap<Integer,Subtask> subtaskList){
         for (Integer key : epicList.keySet()) {
             Manager.showEpic(epicList.get(key),subtaskList);
+        }
+    }
+    public static void printAllSubtasks(HashMap<Integer,Subtask> subtaskList){
+        for (Integer key : subtaskList.keySet()) {
+            Manager.showSubtask(subtaskList.get(key));
         }
     }
     public static HashMap<Integer, Task> deleteTask (Integer taskToDelete,
@@ -266,7 +274,7 @@ public class Manager {
         subtaskListDeleteFrom.remove(subtaskToDelete);
         Manager.deleteAllSubtasks(currentSubtaskList);
         for (Integer key : subtaskListDeleteFrom.keySet()) {
-            Manager.saveTaskToFile(subtaskListDeleteFrom.get(key));
+            Manager.saveSubtaskToFile(subtaskListDeleteFrom.get(key));
         }
         return subtaskListDeleteFrom;
     }
@@ -308,5 +316,50 @@ public class Manager {
         epicListToUpdate.put(epicToUpdateID, epicToUpdate);
         Manager.saveEpicToFile(epicToUpdate);
         return epicListToUpdate;
+    }
+    public static void updateSubtask (Integer subtaskToUpdateID,
+                                                          HashMap<Integer, Subtask> currentSubtaskList) throws IOException{
+        HashMap<Integer, Epic> epicListToUpdate = loadEpicFromFile();
+        HashMap<Integer, Subtask> subtaskListToUpdate = loadSubtaskFromFile();
+        Subtask subtaskToUpdate = subtaskListToUpdate.get(subtaskToUpdateID);
+        Epic epicToUpdate = epicListToUpdate.get(subtaskToUpdate.parentID);
+        int subtaskDoneCounter = 0;
+
+        System.out.println("Выполнили подзадачу? Y/N");
+        String command = scanner.nextLine();
+        if (command.equals("Y")){
+if (subtaskToUpdate.status.equals("NEW")) {
+                subtaskToUpdate.status = "DONE";
+                subtaskListToUpdate = deleteSubtask(subtaskToUpdateID, currentSubtaskList);
+                subtaskListToUpdate.put(subtaskToUpdateID, subtaskToUpdate);
+                saveSubtaskToFile(subtaskToUpdate);
+                epicListToUpdate.get(subtaskToUpdate.parentID).status = "IN_PROGRESS";
+                for (Integer key : subtaskListToUpdate.keySet()) {
+                    if (subtaskListToUpdate.get(key).parentID == subtaskToUpdate.parentID) {
+                        if (subtaskListToUpdate.get(key).status.equals("DONE")) {
+                            subtaskDoneCounter++;
+                        }
+                        subtaskDoneCounter--;
+                    }
+                }
+                if (subtaskDoneCounter == 0){
+                    epicListToUpdate.get(subtaskToUpdate.parentID).status = "DONE";
+                }
+            deleteEpic(subtaskToUpdate.parentID, epicListToUpdate, subtaskListToUpdate, "withoutSubtasks");
+            epicListToUpdate.put(epicToUpdate.id, epicToUpdate);
+            Manager.saveEpicToFile(epicToUpdate);
+            } else {
+                System.out.println("Задача уже выполнена");
+            }
+        }
+        System.out.println("Задача изменилась?");
+        command = scanner.nextLine();
+        if (command.equals("Y")) {
+            System.out.println("Что делаем теперь?");
+            subtaskToUpdate.overview = scanner.nextLine();
+            subtaskListToUpdate = deleteSubtask(subtaskToUpdateID, currentSubtaskList);
+            subtaskListToUpdate.put(subtaskToUpdateID, subtaskToUpdate);
+            saveSubtaskToFile(subtaskToUpdate);
+        }
     }
 }
