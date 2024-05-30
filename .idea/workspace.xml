@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить методы менеджера для удаления и обновления Эпиков, удаления подзадач.&#10;feat: добавлено меню действий">
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить методы менеджера отображения подзадач. Добавить метод менеджера для обновления подзадач">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Epic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Subtask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Subtask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +51,9 @@
     <setting file="jar://$USER_HOME$/.jdks/openjdk-21.0.2/lib/src.zip!/java.base/sun/nio/fs/NativeBuffers.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar://$USER_HOME$/.jdks/openjdk-21.0.2/lib/src.zip!/java.base/sun/nio/fs/WindowsChannelFactory.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar://$USER_HOME$/.jdks/openjdk-21.0.2/lib/src.zip!/java.base/sun/nio/fs/WindowsNativeDispatcher.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -174,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716749999034</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: Добавить методы менеджера отображения подзадач. Добавить метод менеджера для обновления подзадач">
+      <option name="closed" value="true" />
+      <created>1716931810967</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716931810967</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,12 +217,14 @@
     <MESSAGE value="feat: Добавить метод менеджера для удаления задачи. Добавить метод менеджера для обновления задачи" />
     <MESSAGE value="feat: Добавить методы Epic,Subtask&#10;feat: Добавить методы менеджера для сохранения и считывания в файл Эпиков и подзадач. Добавить методы для ввода Эпиков и подзадач.&#10;refactor: Изменить ключ для всех типов задач на уникальный ID вместо названия." />
     <MESSAGE value="feat: Добавить методы менеджера для удаления и обновления Эпиков, удаления подзадач.&#10;feat: добавлено меню действий" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить методы менеджера для удаления и обновления Эпиков, удаления подзадач.&#10;feat: добавлено меню действий" />
+    <MESSAGE value="feat: Добавить методы менеджера отображения подзадач. Добавить метод менеджера для обновления подзадач" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить методы менеджера отображения подзадач. Добавить метод менеджера для обновления подзадач" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="Application">
         <watch expression="taskList" />
+        <watch expression="currentTask.overview" />
       </configuration>
     </watches-manager>
   </component>

@@ -4,18 +4,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main (String[] args) throws IOException {
-        HashMap<Integer, Task> taskList;
-        HashMap<Integer, Epic> epicList;
-        HashMap<Integer, Subtask> subtaskList;
+        HashMap<Integer, Task> taskList = Manager.loadTaskFromFile();
+        HashMap<Integer, Epic> epicList = Manager.loadEpicFromFile();
+        HashMap<Integer, Subtask> subtaskList = Manager.loadSubtaskFromFile();
+        int currentID = Manager.loadIdFromFile();
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
-        Task currentTask;
-        Epic currentEpic;
-        Subtask currentSubtask;
-        //стартовая загрузка из файла
-        taskList = Manager.loadTaskFromFile();
-        epicList = Manager.loadEpicFromFile();
-        subtaskList = Manager.loadSubtaskFromFile();
+
         while (!command.equals("E")){
             System.out.println("""
                     \t\t\t==================================================================================
@@ -31,94 +26,89 @@ public class Main {
             command = scanner.nextLine();
             switch (command) {
                 case "1" -> {
-                    Task newTask = Manager.createTask();
-                    taskList.put(newTask.id, newTask);
-                    Manager.saveTaskToFile(newTask);
+                    Task taskToAdd = Manager.createTask(currentID);
+                    taskList.put(taskToAdd.id, taskToAdd);
+                    currentID++;
                 }
                 case "2" -> {
                     System.out.println("Какую задачу хотим посмотреть?");
                     String taskID = scanner.nextLine();
                     try {
-                        currentTask = taskList.get(Integer.parseInt(taskID));
-                        Manager.showTask(currentTask);
+                        Manager.showTask(taskList.get(Integer.parseInt(taskID)));
                     } catch (Exception e) {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "5" -> Manager.deleteAllTasks(taskList);
-                case "3" -> Manager.printAllTasks(taskList);
+                case "3" -> Manager.showAllTasks(taskList);
                 case "4" -> {
                     System.out.println("Какую задачу хотим удалить?");
                     String taskToDelete = scanner.nextLine();
-                    taskList = Manager.deleteTask(Integer.parseInt(taskToDelete), taskList);
+                    Manager.deleteTask(Integer.parseInt(taskToDelete), taskList);
                 }
+                case "5" -> Manager.deleteAllTasks(taskList);
                 case "6" -> {
                     System.out.println("Какую задачу хотим обновить?");
                     String taskToUpdate = scanner.nextLine();
-                    taskList = Manager.updateTask(Integer.parseInt(taskToUpdate), taskList);
+                    Manager.updateTask(Integer.parseInt(taskToUpdate), taskList);
                 }
                 case "8" -> {
-                    Epic newEpic = Manager.createEpic();
+                    Epic newEpic = Manager.createEpic(currentID);
                     epicList.put(newEpic.id, newEpic);
-                    Manager.saveEpicToFile(newEpic);
+                    currentID++;
                 }
                 case "9" -> {
                     System.out.println("Какой эпик хотим посмотреть?");
                     String epicID = scanner.nextLine();
                     try {
-                        currentEpic = epicList.get(Integer.parseInt(epicID));
-                        Manager.showEpic(currentEpic, subtaskList);
+                        Manager.showEpic(epicList.get(Integer.parseInt(epicID)), subtaskList);
                     } catch (Exception e) {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "12" -> Manager.deleteAllEpics(epicList,subtaskList);
-                case "10" -> Manager.printAllEpics(epicList,subtaskList);
+                case "10" -> Manager.showAllEpics(epicList,subtaskList);
+
                 case "11" -> {
                     System.out.println("Какой эпик хотим удалить?");
                     String epicToDelete = scanner.nextLine();
                     Manager.deleteEpic(Integer.parseInt(epicToDelete), epicList, subtaskList, "withSubtasks");
-                    epicList = Manager.loadEpicFromFile();
-                    subtaskList = Manager.loadSubtaskFromFile();
                 }
+                case "12" -> Manager.deleteAllEpics(epicList,subtaskList);
                 case "13" -> {
                     System.out.println("Какой эпик хотим обновить?");
-                    String taskToUpdate = scanner.nextLine();
-                    epicList = Manager.updateEpic(Integer.parseInt(taskToUpdate), epicList, subtaskList);
-                    subtaskList = Manager.loadSubtaskFromFile();
+                    String epicToUpdate = scanner.nextLine();
+                    Manager.updateEpic(Integer.parseInt(epicToUpdate), epicList);
                 }
                 case "15" -> {
-                    Subtask newSubtask = Manager.createSubtask(epicList);
-                    if (newSubtask.name != null){
+                    Subtask newSubtask = Manager.createSubtask(currentID, epicList);
                     subtaskList.put(newSubtask.id, newSubtask);
-                    Manager.saveSubtaskToFile(newSubtask);
-                    }
+                    currentID++;
                 }
                 case "16" -> {
                     System.out.println("Какую подзадачу хотим посмотреть?");
                     String subtaskID = scanner.nextLine();
                     try {
-                        currentSubtask = subtaskList.get(Integer.parseInt(subtaskID));
-                        Manager.showSubtask(currentSubtask);
+                        Manager.showSubtask(subtaskList.get(Integer.parseInt(subtaskID)));
                     } catch (Exception e) {
                         System.out.println("Такой подзадачи нет\n");
                     }
                 }
-                case "17" -> Manager.printAllSubtasks(subtaskList);
+                case "17" -> Manager.showAllSubtasks(subtaskList);
                 case "18" -> {
                     System.out.println("Какую подзадачу хотим удалить?");
                     String subtaskToDelete = scanner.nextLine();
-                    subtaskList = Manager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList);
+                    Manager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList,epicList);
                 }
                 case "19" -> Manager.deleteAllSubtasks(subtaskList);
                 case "20" -> {
                     System.out.println("Какую подзадачу хотим обновить?");
                     String subtaskToUpdate = scanner.nextLine();
-                    Manager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList);
-                    epicList = Manager.loadEpicFromFile();
-                    subtaskList = Manager.loadSubtaskFromFile();
+                    Manager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
                 }
             }
         }
+        Manager.saveTaskListToFile(taskList);
+        Manager.saveEpicListToFile(epicList);
+        Manager.saveSubtaskListToFile(subtaskList);
+        Manager.saveIdToFile(currentID);
     }
 }
