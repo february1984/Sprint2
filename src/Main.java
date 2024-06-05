@@ -7,6 +7,7 @@ public class Main {
         HashMap<Integer, Task> taskList = Manager.loadTaskFromFile();
         HashMap<Integer, Epic> epicList = Manager.loadEpicFromFile();
         HashMap<Integer, Subtask> subtaskList = Manager.loadSubtaskFromFile();
+        InMemoryTaskManager currManager = new InMemoryTaskManager();
         int currentID = Manager.loadIdFromFile();
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
@@ -26,7 +27,7 @@ public class Main {
             command = scanner.nextLine();
             switch (command) {
                 case "1" -> {
-                    Task taskToAdd = Manager.createTask(currentID);
+                    Task taskToAdd = currManager.createTask(currentID);
                     taskList.put(taskToAdd.id, taskToAdd);
                     currentID++;
                 }
@@ -34,25 +35,25 @@ public class Main {
                     System.out.println("Какую задачу хотим посмотреть?");
                     String taskID = scanner.nextLine();
                     try {
-                        Manager.showTask(taskList.get(Integer.parseInt(taskID)));
+                        currManager.showTask(taskList.get(Integer.parseInt(taskID)));
                     } catch (Exception e) {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "3" -> Manager.showAllTasks(taskList);
+                case "3" -> currManager.showAllTasks(taskList);
                 case "4" -> {
                     System.out.println("Какую задачу хотим удалить?");
                     String taskToDelete = scanner.nextLine();
-                    Manager.deleteTask(Integer.parseInt(taskToDelete), taskList);
+                    currManager.deleteTask(Integer.parseInt(taskToDelete), taskList);
                 }
-                case "5" -> Manager.deleteAllTasks(taskList);
+                case "5" -> currManager.deleteAllTasks(taskList);
                 case "6" -> {
                     System.out.println("Какую задачу хотим обновить?");
                     String taskToUpdate = scanner.nextLine();
-                    Manager.updateTask(Integer.parseInt(taskToUpdate), taskList);
+                    currManager.updateTask(Integer.parseInt(taskToUpdate), taskList);
                 }
                 case "8" -> {
-                    Epic newEpic = Manager.createEpic(currentID);
+                    Epic newEpic = currManager.createEpic(currentID);
                     epicList.put(newEpic.id, newEpic);
                     currentID++;
                 }
@@ -60,26 +61,26 @@ public class Main {
                     System.out.println("Какой эпик хотим посмотреть?");
                     String epicID = scanner.nextLine();
                     try {
-                        Manager.showEpic(epicList.get(Integer.parseInt(epicID)), subtaskList);
+                        currManager.showEpic(epicList.get(Integer.parseInt(epicID)), subtaskList);
                     } catch (Exception e) {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "10" -> Manager.showAllEpics(epicList,subtaskList);
+                case "10" -> currManager.showAllEpics(epicList,subtaskList);
 
                 case "11" -> {
                     System.out.println("Какой эпик хотим удалить?");
                     String epicToDelete = scanner.nextLine();
-                    Manager.deleteEpic(Integer.parseInt(epicToDelete), epicList, subtaskList, "withSubtasks");
+                    currManager.deleteEpic(Integer.parseInt(epicToDelete), epicList, subtaskList, "withSubtasks");
                 }
-                case "12" -> Manager.deleteAllEpics(epicList,subtaskList);
+                case "12" -> currManager.deleteAllEpics(epicList,subtaskList);
                 case "13" -> {
                     System.out.println("Какой эпик хотим обновить?");
                     String epicToUpdate = scanner.nextLine();
-                    Manager.updateEpic(Integer.parseInt(epicToUpdate), epicList);
+                    currManager.updateEpic(Integer.parseInt(epicToUpdate), epicList);
                 }
                 case "15" -> {
-                    Subtask newSubtask = Manager.createSubtask(currentID, epicList);
+                    Subtask newSubtask = currManager.createSubtask(currentID, epicList);
                     subtaskList.put(newSubtask.id, newSubtask);
                     currentID++;
                 }
@@ -87,22 +88,22 @@ public class Main {
                     System.out.println("Какую подзадачу хотим посмотреть?");
                     String subtaskID = scanner.nextLine();
                     try {
-                        Manager.showSubtask(subtaskList.get(Integer.parseInt(subtaskID)));
+                        currManager.showSubtask(subtaskList.get(Integer.parseInt(subtaskID)));
                     } catch (Exception e) {
                         System.out.println("Такой подзадачи нет\n");
                     }
                 }
-                case "17" -> Manager.showAllSubtasks(subtaskList);
+                case "17" -> currManager.showAllSubtasks(subtaskList);
                 case "18" -> {
                     System.out.println("Какую подзадачу хотим удалить?");
                     String subtaskToDelete = scanner.nextLine();
-                    Manager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList,epicList);
+                    currManager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList,epicList);
                 }
-                case "19" -> Manager.deleteAllSubtasks(subtaskList);
+                case "19" -> currManager.deleteAllSubtasks(subtaskList);
                 case "20" -> {
                     System.out.println("Какую подзадачу хотим обновить?");
                     String subtaskToUpdate = scanner.nextLine();
-                    Manager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
+                    currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
                 }
             }
         }
