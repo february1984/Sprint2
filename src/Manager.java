@@ -91,6 +91,25 @@ public interface Manager {
         reader.close();
         return  Integer.parseInt(maxIndex);
     }
+    static ArrayList<String> loadTaskHistoryFromFile() {
+        String file;
+        ArrayList<String> taskHistory = new ArrayList<>();
+
+        try {
+            file = Files.readString(Path.of("C:\\Users\\Admin\\IdeaProjects\\Sprint2\\TaskHistory.txt"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (file != null) {
+            String[] lines = file.split("\\n");
+            if (!Objects.equals(lines[0], "")) {
+                for (int i = 0; i < lines.length; i++ ) {
+                    taskHistory.set(i, lines[i]);
+                }
+            }
+        }
+        return taskHistory;
+    }
     static void saveTaskListToFile(HashMap<Integer, Task> taskList) throws IOException {
         FileWriter cleaner = new FileWriter("TaskList.txt",false);
         cleaner.write("");
@@ -129,7 +148,18 @@ public interface Manager {
         writer.write(String.valueOf(id));
         writer.close();
     }
+    static void saveTaskHistoryToFile(ArrayList<String> history) throws IOException {
+        FileWriter cleaner = new FileWriter("TaskHistory.txt",false);
+        cleaner.write("");
+        cleaner.close();
+        FileWriter writer = new FileWriter("TaskHistory.txt", true);
+        for (String currView: history) {
+            writer.write(currView +'\n');
+        }
+        writer.close();
+    }
 
+    void showTaskViewsHistory();
     Task createTask(int maxId);
     void showTask(Task task);
     void showAllTasks (HashMap<Integer,Task> taskList);

@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InMemoryTaskManager implements Manager {
+    ArrayList<String> history = new ArrayList<>();
+    @Override
+    public void showTaskViewsHistory() {
+        for (String currViewInHistory: history){
+            System.out.println(currViewInHistory + " ");
+        }
+    }
     @Override
     public Task createTask(int maxId) {
         Task taskToSet = new Task();
@@ -18,6 +25,12 @@ public class InMemoryTaskManager implements Manager {
     @Override
     public void showTask(Task task) {
         System.out.println(task.id + "," + task.status + "," + task.name + "," + task.overview + "," + task.taskType + "\n");
+        if (history.size() < 10 ) {
+            history.add("(" + task.taskType + " " + task.name + ")");
+        } else {
+            history.add("(" + task.taskType + " " + task.name + ")");
+            history.removeFirst();
+        }
     }
     @Override
     public void showAllTasks (HashMap<Integer,Task> taskList){
@@ -71,6 +84,12 @@ public class InMemoryTaskManager implements Manager {
             if (subtaskList.get(key).parentID == epic.id){
                 System.out.println("\t" + subtaskList.get(key).id + "," + subtaskList.get(key).status + "," + subtaskList.get(key).name + "," + subtaskList.get(key).overview);
             }
+        }
+        if (history.size() < 10 ) {
+            history.add("(" + epic.taskType + " " + epic.name + ")");
+        } else {
+            history.add("(" + epic.taskType + " " + epic.name + ")");
+            history.removeFirst();
         }
     }
     @Override
@@ -136,6 +155,12 @@ public class InMemoryTaskManager implements Manager {
     @Override
     public void showSubtask(Subtask subtask) {
         System.out.println(subtask.id + "," + subtask.status + "," + subtask.name + "," + subtask.overview + "," + subtask.taskType + "\n");
+        if (history.size() < 10 ) {
+            history.add("(" + subtask.taskType + " " + subtask.name + ")");
+        } else {
+            history.add("(" + subtask.taskType + " " + subtask.name + ")");
+            history.removeFirst();
+        }
     }
     @Override
     public void showAllSubtasks(HashMap<Integer,Subtask> subtaskList){

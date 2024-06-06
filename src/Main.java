@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ public class Main {
         HashMap<Integer, Epic> epicList = Manager.loadEpicFromFile();
         HashMap<Integer, Subtask> subtaskList = Manager.loadSubtaskFromFile();
         InMemoryTaskManager currManager = new InMemoryTaskManager();
+        ArrayList<String> viewedTasksHistory = Manager.loadTaskHistoryFromFile();
         int currentID = Manager.loadIdFromFile();
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
@@ -23,6 +25,7 @@ public class Main {
                     \t\t\t==================================================================================
                     Подзадачу\t|| код 15\t|| код 16\t|| код 17\t\t|| код 18\t|| код 19\t\t||  код 20 \t||
                     \t\t\t==================================================================================
+                    \t\t\t*21 - Показать историю сессии
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -105,11 +108,13 @@ public class Main {
                     String subtaskToUpdate = scanner.nextLine();
                     currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
                 }
+                case "21" -> currManager.showTaskViewsHistory();
             }
         }
         Manager.saveTaskListToFile(taskList);
         Manager.saveEpicListToFile(epicList);
         Manager.saveSubtaskListToFile(subtaskList);
         Manager.saveIdToFile(currentID);
+        Manager.saveTaskHistoryToFile(viewedTasksHistory);
     }
 }
