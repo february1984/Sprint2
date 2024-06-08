@@ -5,6 +5,11 @@ import java.util.*;
 
 public interface Manager {
     Scanner scanner = new Scanner(System.in);
+    enum taskType{
+        TASK,
+        SUBTASK,
+        EPIC
+    }
 
     static HashMap<Integer, Task> loadTaskFromFile() {
         String file;

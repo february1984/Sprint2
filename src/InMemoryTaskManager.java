@@ -19,7 +19,7 @@ public class InMemoryTaskManager implements Manager {
         System.out.println("Что будем делать?");
         taskToSet.overview = scanner.nextLine();
         taskToSet.status = "NEW";
-        taskToSet.taskType = "Task";
+        taskToSet.taskType = taskType.TASK.name();
         return taskToSet;
     }
     @Override
@@ -74,7 +74,7 @@ public class InMemoryTaskManager implements Manager {
         System.out.println("Что будем делать?");
         epicToSet.overview = scanner.nextLine();
         epicToSet.status = "NEW";
-        epicToSet.taskType = "Epic";
+        epicToSet.taskType = taskType.EPIC.name();
         return epicToSet;
     }
     @Override
@@ -146,7 +146,7 @@ public class InMemoryTaskManager implements Manager {
         System.out.println("Что будем делать?");
         subtaskToSet.overview = scanner.nextLine();
         subtaskToSet.status = "NEW";
-        subtaskToSet.taskType = "Subtask";
+        subtaskToSet.taskType = taskType.SUBTASK.name();
         if (epicList.get(subtaskToSet.parentID).status.equals("DONE")){
             epicList.get(subtaskToSet.parentID).status = "IN_PROGRESS";
         }
