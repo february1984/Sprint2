@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить историю просмотров сессии">
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum">
+      <change afterPath="$PROJECT_DIR$/src/HistoryManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HistoryNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +19,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -210,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717690775852</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum">
+      <option name="closed" value="true" />
+      <created>1717848192221</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1717848192221</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,7 +254,8 @@
     <MESSAGE value="feat: Добавить удаление одной и всех подзадач. Добавить изменение подзадач. Добавить корректное поведение статуса Эпика при обновлении, удалении, изменении подзадачи.&#10;refactor: сделать считывание и запись в файл один раз, при старте и завершении соответственно. Сделать работу менеджера по ссылкам на HashMap." />
     <MESSAGE value="refactor: реализовать Менедежер через интерфейс" />
     <MESSAGE value="feat: Добавить историю просмотров сессии" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить историю просмотров сессии" />
+    <MESSAGE value="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

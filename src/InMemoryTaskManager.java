@@ -1,8 +1,45 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class InMemoryTaskManager implements Manager {
+public class InMemoryTaskManager implements Manager, HistoryManager {
     ArrayList<String> history = new ArrayList<>();
+    HashMap<Integer, HistoryNode> taskList= new HashMap<>();
+    ArrayList<HistoryNode> linkedHistory = new ArrayList<>();
+    public HistoryNode head = new HistoryNode();
+    public HistoryNode tail = new HistoryNode();
+
+    public ArrayList<HistoryNode> linkLast (ArrayList<HistoryNode> currHistory, Task taskToAdd){
+        HistoryNode node;
+        node = new HistoryNode();
+        if(currHistory.isEmpty()){
+            node.task = taskToAdd;
+            node.previousNode = head;
+            node.nextNode = tail;
+            head.nextNode = node;
+            tail.previousNode = node;
+            node.nodeID = taskToAdd.id;
+            currHistory.add(node);
+            taskList.put(taskToAdd.id,node);
+        } else {
+            node.task = taskToAdd;
+            node.previousNode = tail.previousNode;
+            node.nextNode = tail;
+            tail.previousNode.nextNode = node;
+            tail.previousNode = node;
+            node.nodeID = taskToAdd.id;
+            currHistory.add(node);
+            taskList.put(taskToAdd.id,node);
+        }
+        return currHistory;
+    }
+    public ArrayList<Task> getTasks (ArrayList<HistoryNode> currHistory){
+        ArrayList<Task> tasksToGet = new ArrayList<>();
+        for(HistoryNode node : currHistory){
+            tasksToGet.add(node.task);
+        }
+        return tasksToGet;
+    }
     @Override
     public void showTaskViewsHistory() {
         for (String currViewInHistory: history){
@@ -31,6 +68,10 @@ public class InMemoryTaskManager implements Manager {
             history.add("(" + task.taskType + " " + task.name + ")");
             history.removeFirst();
         }
+        if (taskList.containsKey(task.id)) {
+            remove(task);
+            add(task);
+        } else add(task);
     }
     @Override
     public void showAllTasks (HashMap<Integer,Task> taskList){
@@ -91,6 +132,7 @@ public class InMemoryTaskManager implements Manager {
             history.add("(" + epic.taskType + " " + epic.name + ")");
             history.removeFirst();
         }
+        add(epic);
     }
     @Override
     public void showAllEpics(HashMap<Integer,Epic> epicList, HashMap<Integer,Subtask> subtaskList){
@@ -161,6 +203,7 @@ public class InMemoryTaskManager implements Manager {
             history.add("(" + subtask.taskType + " " + subtask.name + ")");
             history.removeFirst();
         }
+        add(subtask);
     }
     @Override
     public void showAllSubtasks(HashMap<Integer,Subtask> subtaskList){
@@ -228,5 +271,18 @@ public class InMemoryTaskManager implements Manager {
             System.out.println("Что делаем теперь?");
             currentSubtaskList.get(subtaskToUpdateID).overview = scanner.nextLine();
         }
+    }
+    @Override
+    public void add(Task task) {
+        linkedHistory = linkLast(linkedHistory, task);
+    }
+    @Override
+    public void remove(Task task) {
+        taskList.get(task.id).previousNode = taskList.get(task.id).nextNode;
+        taskList.get(task.id).nextNode = taskList.get(task.id).previousNode;
+    }
+    @Override
+    public List<Task> getHistory() {
+        return getTasks(linkedHistory);
     }
 }

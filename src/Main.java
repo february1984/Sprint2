@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +12,7 @@ public class Main {
         InMemoryTaskManager currManager = new InMemoryTaskManager();
         ArrayList<String> viewedTasksHistory = Manager.loadTaskHistoryFromFile();
         int currentID = Manager.loadIdFromFile();
+        List<Task> history;
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
 
@@ -109,6 +111,12 @@ public class Main {
                     currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
                 }
                 case "21" -> currManager.showTaskViewsHistory();
+                case "22" -> {
+                    history = currManager.getHistory();
+                    for (Task task : history){
+                        System.out.println("(" + task.taskType + " " + task.name + ")");
+                    }
+                }
             }
         }
         Manager.saveTaskListToFile(taskList);
