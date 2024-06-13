@@ -117,6 +117,7 @@ public class Main {
                         System.out.println("(" + task.taskType + " " + task.name + ")");
                     }
                 }
+                case "23" -> currManager.remove(taskList.get(62));
             }
         }
         Manager.saveTaskListToFile(taskList);

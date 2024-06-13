@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum">
-      <change afterPath="$PROJECT_DIR$/src/HistoryManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HistoryNode.java" afterDir="false" />
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить интерфейс Для работы с историей. Добавить класс для хранения узлов связного списка. Реализовать связный список. Добавить методы для добавления узлов в список и вывода списка.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -66,21 +64,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
@@ -221,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717848192221</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat: Добавить интерфейс Для работы с историей. Добавить класс для хранения узлов связного списка. Реализовать связный список. Добавить методы для добавления узлов в список и вывода списка.">
+      <option name="closed" value="true" />
+      <created>1718208458851</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718208458851</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -255,7 +261,8 @@
     <MESSAGE value="refactor: реализовать Менедежер через интерфейс" />
     <MESSAGE value="feat: Добавить историю просмотров сессии" />
     <MESSAGE value="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить утилитарный класс Managers&#10;refactor: Перенести типы задач в Enum" />
+    <MESSAGE value="feat: Добавить интерфейс Для работы с историей. Добавить класс для хранения узлов связного списка. Реализовать связный список. Добавить методы для добавления узлов в список и вывода списка." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить интерфейс Для работы с историей. Добавить класс для хранения узлов связного списка. Реализовать связный список. Добавить методы для добавления узлов в список и вывода списка." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -270,6 +277,7 @@
       <configuration name="Application">
         <watch expression="taskList" />
         <watch expression="currentTask.overview" />
+        <watch expression="taskList.entrySet().toArray()[3]" />
       </configuration>
     </watches-manager>
   </component>
