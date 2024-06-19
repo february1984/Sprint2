@@ -1,7 +1,7 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public interface HistoryManager {
     void add(Task task);
     void remove (Task task);
-    List<Task> getHistory();
+    ArrayList<String> getHistory(ArrayList<String> history);
 }

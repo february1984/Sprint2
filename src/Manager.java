@@ -108,9 +108,7 @@ public interface Manager {
         if (file != null) {
             String[] lines = file.split("\\n");
             if (!Objects.equals(lines[0], "")) {
-                for (int i = 0; i < lines.length; i++ ) {
-                    taskHistory.set(i, lines[i]);
-                }
+                taskHistory.addAll(Arrays.asList(lines));
             }
         }
         return taskHistory;

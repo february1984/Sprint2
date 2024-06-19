@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,10 +11,8 @@ public class Main {
         InMemoryTaskManager currManager = new InMemoryTaskManager();
         ArrayList<String> viewedTasksHistory = Manager.loadTaskHistoryFromFile();
         int currentID = Manager.loadIdFromFile();
-        List<Task> history;
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
-
         while (!command.equals("E")){
             System.out.println("""
                     \t\t\t==================================================================================
@@ -27,7 +24,7 @@ public class Main {
                     \t\t\t==================================================================================
                     Подзадачу\t|| код 15\t|| код 16\t|| код 17\t\t|| код 18\t|| код 19\t\t||  код 20 \t||
                     \t\t\t==================================================================================
-                    \t\t\t*21 - Показать историю сессии
+                    \t\t\t*21 - Показать историю сессии **22 - Показать историю быстрее
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -112,18 +109,17 @@ public class Main {
                 }
                 case "21" -> currManager.showTaskViewsHistory();
                 case "22" -> {
-                    history = currManager.getHistory();
-                    for (Task task : history){
-                        System.out.println("(" + task.taskType + " " + task.name + ")");
+                    viewedTasksHistory = currManager.getHistory(viewedTasksHistory);
+                    for (String task : viewedTasksHistory){
+                        System.out.println(task);
                     }
                 }
-                case "23" -> currManager.remove(taskList.get(62));
             }
         }
         Manager.saveTaskListToFile(taskList);
         Manager.saveEpicListToFile(epicList);
         Manager.saveSubtaskListToFile(subtaskList);
         Manager.saveIdToFile(currentID);
-        Manager.saveTaskHistoryToFile(viewedTasksHistory);
+        Manager.saveTaskHistoryToFile(currManager.getHistory(viewedTasksHistory));
     }
 }

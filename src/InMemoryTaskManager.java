@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class InMemoryTaskManager implements Manager, HistoryManager {
     ArrayList<String> history = new ArrayList<>();
@@ -8,6 +7,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     ArrayList<HistoryNode> linkedHistory = new ArrayList<>();
     public HistoryNode head = new HistoryNode();
     public HistoryNode tail = new HistoryNode();
+    Integer historyLength = 0;
 
     public ArrayList<HistoryNode> linkLast (ArrayList<HistoryNode> currHistory, Task taskToAdd){
         HistoryNode node;
@@ -21,6 +21,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
             node.nodeID = taskToAdd.id;
             currHistory.add(node);
             taskList.put(taskToAdd.id,node);
+            historyLength++;
         } else {
             node.task = taskToAdd;
             node.previousNode = tail.previousNode;
@@ -30,15 +31,26 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
             node.nodeID = taskToAdd.id;
             currHistory.add(node);
             taskList.put(taskToAdd.id,node);
+            historyLength++;
+            if (historyLength > 10){
+                remove(head.nextNode.task);
+                historyLength--;
+            }
         }
         return currHistory;
     }
-    public ArrayList<Task> getTasks (){
+    public ArrayList<String> getTasks (ArrayList<String> tasksToGet){
         HistoryNode currNode = head.nextNode;
-        ArrayList<Task> tasksToGet = new ArrayList<>();
-        while(currNode != tail){
-            tasksToGet.add(currNode.task);
-            currNode = currNode.nextNode;
+        if (currNode != null) {
+            while (currNode != tail) {
+                if (tasksToGet.size() < 10 && !tasksToGet.contains("(" + currNode.task.taskType + " " + currNode.task.name + ")")) {
+                    tasksToGet.add("(" + currNode.task.taskType + " " + currNode.task.name + ")");
+                } else if (!tasksToGet.contains("(" + currNode.task.taskType + " " + currNode.task.name + ")")) {
+                    tasksToGet.removeFirst();
+                    tasksToGet.add("(" + currNode.task.taskType + " " + currNode.task.name + ")");
+                }
+                currNode = currNode.nextNode;
+            }
         }
         return tasksToGet;
     }
@@ -297,7 +309,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         taskList.get(task.id).nextNode.previousNode = taskList.get(task.id).previousNode;
     }
     @Override
-    public List<Task> getHistory() {
-        return getTasks();
+    public ArrayList<String> getHistory (ArrayList<String> currHistory) {
+        return getTasks(currHistory);
     }
 }
