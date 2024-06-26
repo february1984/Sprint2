@@ -121,14 +121,11 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         }
     }
     @Override
-    public Epic createEpic (int maxId) {
+    public Epic createEpic (String name, String overview, int maxId) {
         Epic epicToSet = new Epic();
-        System.out.println("Заводим новый эпик:\n");
         epicToSet.id = maxId;
-        System.out.println("Как назовем эпик?");
-        epicToSet.name = scanner.nextLine();
-        System.out.println("Что будем делать?");
-        epicToSet.overview = scanner.nextLine();
+        epicToSet.name = name;
+        epicToSet.overview = overview;
         epicToSet.status = "NEW";
         epicToSet.taskType = taskType.EPIC.name();
         return epicToSet;
@@ -195,25 +192,16 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         epicList.get(epicToUpdateID).overview = scanner.nextLine();
     }
     @Override
-    public Subtask createSubtask (int maxId, HashMap<Integer,Epic> epicList){
+    public Subtask createSubtask (int maxId, int parentID, HashMap<Integer,Epic> epicList, String name, String overview){
         Subtask subtaskToSet = new Subtask();
-        System.out.println("Подзадача какого эпика?");
-        subtaskToSet.parentID = Integer.parseInt(scanner.nextLine());
-        while (!epicList.containsKey(subtaskToSet.parentID)){
-            System.out.println("Такого эпика нет. Список доступных эпиков: " + epicList.keySet());
-            System.out.println("Пожалуйста введите эпик снова");
-            subtaskToSet.parentID = Integer.parseInt(scanner.nextLine());
-        }
-        System.out.println("Заводим новую подзадачу:\n");
         subtaskToSet.id = maxId;
-        System.out.println("Как назовем подзадачу?");
-        subtaskToSet.name = scanner.nextLine();
-        System.out.println("Что будем делать?");
-        subtaskToSet.overview = scanner.nextLine();
+        subtaskToSet.name = name;
+        subtaskToSet.overview = overview;
         subtaskToSet.status = "NEW";
         subtaskToSet.taskType = taskType.SUBTASK.name();
-        if (epicList.get(subtaskToSet.parentID).status.equals("DONE")){
-            epicList.get(subtaskToSet.parentID).status = "IN_PROGRESS";
+        subtaskToSet.parentID = parentID;
+        if (epicList.get(parentID).status.equals("DONE")){
+            epicList.get(parentID).status = "IN_PROGRESS";
         }
         return subtaskToSet;
     }
@@ -268,12 +256,12 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     @Override
     public void updateSubtask (Integer subtaskToUpdateID,
                                HashMap<Integer, Subtask> currentSubtaskList,
-                               HashMap <Integer, Epic> currentEpicList) {
+                               HashMap <Integer, Epic> currentEpicList,
+                               String completeCommand,
+                               String changeCommand) {
         int subtaskDoneCounter = 0;
 
-        System.out.println("Выполнили подзадачу? Y/N");
-        String command = scanner.nextLine();
-        if (command.equals("Y")){
+        if (completeCommand.equals("Y")){
             if (currentSubtaskList.get(subtaskToUpdateID).status.equals("NEW")) {
                 currentSubtaskList.get(subtaskToUpdateID).status = "DONE";
                 currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "IN_PROGRESS";
@@ -292,9 +280,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                 System.out.println("Задача уже выполнена");
             }
         }
-        System.out.println("Задача изменилась?");
-        command = scanner.nextLine();
-        if (command.equals("Y")) {
+        if (changeCommand.equals("Y")) {
             System.out.println("Что делаем теперь?");
             currentSubtaskList.get(subtaskToUpdateID).overview = scanner.nextLine();
         }

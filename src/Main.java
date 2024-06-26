@@ -55,7 +55,12 @@ public class Main {
                     currManager.updateTask(Integer.parseInt(taskToUpdate), taskList);
                 }
                 case "8" -> {
-                    Epic newEpic = currManager.createEpic(currentID);
+                    System.out.println("Заводим новый эпик:\n");
+                    System.out.println("Как назовем эпик?");
+                    String name = scanner.nextLine();
+                    System.out.println("Что будем делать?");
+                    String overview = scanner.nextLine();
+                    Epic newEpic = currManager.createEpic(name, overview, currentID);
                     epicList.put(newEpic.id, newEpic);
                     currentID++;
                 }
@@ -82,7 +87,19 @@ public class Main {
                     currManager.updateEpic(Integer.parseInt(epicToUpdate), epicList);
                 }
                 case "15" -> {
-                    Subtask newSubtask = currManager.createSubtask(currentID, epicList);
+                    System.out.println("Подзадача какого эпика?");
+                    int parentID = Integer.parseInt(scanner.nextLine());
+                    while (!epicList.containsKey(parentID)) {
+                        System.out.println("Такого эпика нет. Список доступных эпиков: " + epicList.keySet());
+                        System.out.println("Пожалуйста введите эпик снова");
+                        parentID = Integer.parseInt(scanner.nextLine());
+                    }
+                    System.out.println("Заводим новую подзадачу:\n");
+                    System.out.println("Как назовем подзадачу?");
+                    String name = scanner.nextLine();
+                    System.out.println("Что будем делать?");
+                    String overview = scanner.nextLine();
+                    Subtask newSubtask = currManager.createSubtask(currentID, parentID,epicList, name, overview);
                     subtaskList.put(newSubtask.id, newSubtask);
                     currentID++;
                 }
@@ -105,7 +122,11 @@ public class Main {
                 case "20" -> {
                     System.out.println("Какую подзадачу хотим обновить?");
                     String subtaskToUpdate = scanner.nextLine();
-                    currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList);
+                    System.out.println("Выполнили подзадачу? Y/N");
+                    String completeCommand = scanner.nextLine();
+                    System.out.println("Задача изменилась?");
+                    String changeCommand = scanner.nextLine();
+                    currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList, completeCommand, changeCommand);
                 }
                 case "21" -> currManager.showTaskViewsHistory();
                 case "22" -> {

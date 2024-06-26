@@ -39,7 +39,7 @@ public class Managers {
             }
 
             @Override
-            public Epic createEpic(int maxId) {
+            public Epic createEpic(String name, String overview, int maxId) {
                 return null;
             }
 
@@ -69,7 +69,7 @@ public class Managers {
             }
 
             @Override
-            public Subtask createSubtask(int maxId, HashMap<Integer, Epic> epicList) {
+            public Subtask createSubtask(int maxId, int parentID, HashMap<Integer, Epic> epicList, String name, String overview) {
                 return null;
             }
 
@@ -94,7 +94,8 @@ public class Managers {
             }
 
             @Override
-            public void updateSubtask(Integer subtaskToUpdateID, HashMap<Integer, Subtask> currentSubtaskList, HashMap<Integer, Epic> currentEpicList) {
+            public void updateSubtask(Integer subtaskToUpdateID, HashMap<Integer, Subtask> currentSubtaskList,
+                                      HashMap<Integer, Epic> currentEpicList, String completeCommand, String changeCommand) {
 
             }
         };
