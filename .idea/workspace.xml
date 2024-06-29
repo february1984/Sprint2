@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавить сохранение и чтение из файла, истории просмотров">
-      <change afterPath="$PROJECT_DIR$/lib/apiguardian-api-1.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-5.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-api-5.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-engine-5.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-params-5.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-platform-commons-1.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-platform-engine-1.8.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/opentest4j-1.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EpicTest.java" afterDir="false" />
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="refactor: для методов создания эпиков и подзадач, а также обновления подзадач, ввод данных вынесен в Main.&#10;feat: добавлено 4 теста для проверки статуса Эпиков">
+      <change afterPath="$PROJECT_DIR$/src/InMemoryTaskManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TaskInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprint2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Sprint2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EpicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EpicTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -81,8 +75,16 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
+    "JUnit.EpicTest.checkEpicStatusWithDoneSubtasks.executor": "Run",
     "JUnit.EpicTest.checkEpicStatusWithNewSubtasks.executor": "Run",
+    "JUnit.EpicTest.checkEpicStatusWithOneDoneSubtask.executor": "Run",
+    "JUnit.EpicTest.checkEpicStatusWithOneInProgressSubtask.executor": "Run",
     "JUnit.EpicTest.checkEpicStatusWithZeroSubtasks.executor": "Run",
+    "JUnit.EpicTest.executor": "Debug",
+    "JUnit.InMemoryTaskManagerTest.checkTaskCreation.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkTaskDeletion.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionEmpty.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionIncorrect.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -105,11 +107,14 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EpicTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -119,50 +124,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EpicTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EpicTest.checkEpicStatusWithOneInProgressSubtask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="EpicTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EpicTest.checkEpicStatusWithDoneSubtasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Sprint2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EpicTest" />
-      <option name="METHOD_NAME" value="checkEpicStatusWithDoneSubtasks" />
+      <option name="METHOD_NAME" value="checkEpicStatusWithOneInProgressSubtask" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EpicTest.checkEpicStatusWithNewSubtasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkTaskCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EpicTest" />
-      <option name="METHOD_NAME" value="checkEpicStatusWithNewSubtasks" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="checkTaskCreation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EpicTest.checkEpicStatusWithOneDoneSubtask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkTaskDeletion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EpicTest" />
-      <option name="METHOD_NAME" value="checkEpicStatusWithOneDoneSubtask" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="checkTaskDeletion" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EpicTest.checkEpicStatusWithZeroSubtasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkTaskDeletionEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="EpicTest" />
-      <option name="METHOD_NAME" value="checkEpicStatusWithZeroSubtasks" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="checkTaskDeletionEmpty" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryTaskManagerTest.checkTaskDeletionIncorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Sprint2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="checkTaskDeletionIncorrect" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -170,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EpicTest" />
-        <item itemvalue="JUnit.EpicTest.checkEpicStatusWithOneDoneSubtask" />
-        <item itemvalue="JUnit.EpicTest.checkEpicStatusWithDoneSubtasks" />
-        <item itemvalue="JUnit.EpicTest.checkEpicStatusWithZeroSubtasks" />
-        <item itemvalue="JUnit.EpicTest.checkEpicStatusWithNewSubtasks" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskDeletionIncorrect" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskDeletionEmpty" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskDeletion" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskCreation" />
+        <item itemvalue="JUnit.EpicTest.checkEpicStatusWithOneInProgressSubtask" />
       </list>
     </recent_temporary>
   </component>
@@ -331,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718826377399</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor: для методов создания эпиков и подзадач, а также обновления подзадач, ввод данных вынесен в Main.&#10;feat: добавлено 4 теста для проверки статуса Эпиков">
+      <option name="closed" value="true" />
+      <created>1719435714936</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1719435714936</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -368,7 +382,8 @@
     <MESSAGE value="feat: Добавить интерфейс Для работы с историей. Добавить класс для хранения узлов связного списка. Реализовать связный список. Добавить методы для добавления узлов в список и вывода списка." />
     <MESSAGE value="feat: Добавить удаление повторяющихся задач из истории. Добавить удаление удаленных задач из истории" />
     <MESSAGE value="feat: Добавить сохранение и чтение из файла, истории просмотров" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавить сохранение и чтение из файла, истории просмотров" />
+    <MESSAGE value="refactor: для методов создания эпиков и подзадач, а также обновления подзадач, ввод данных вынесен в Main.&#10;feat: добавлено 4 теста для проверки статуса Эпиков" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: для методов создания эпиков и подзадач, а также обновления подзадач, ввод данных вынесен в Main.&#10;feat: добавлено 4 теста для проверки статуса Эпиков" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

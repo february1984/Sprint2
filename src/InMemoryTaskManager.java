@@ -9,6 +9,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     public HistoryNode tail = new HistoryNode();
     Integer historyLength = 0;
 
+
     public ArrayList<HistoryNode> linkLast (ArrayList<HistoryNode> currHistory, Task taskToAdd){
         HistoryNode node;
         node = new HistoryNode();
@@ -61,14 +62,11 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         }
     }
     @Override
-    public Task createTask(int maxId) {
+    public Task createTask(int maxId, String name, String overview) {
         Task taskToSet = new Task();
-        System.out.println("Заводим новую задачу:\n");
         taskToSet.id = maxId;
-        System.out.println("Как назовем задачу?");
-        taskToSet.name = scanner.nextLine();
-        System.out.println("Что будем делать?");
-        taskToSet.overview = scanner.nextLine();
+        taskToSet.name = name;
+        taskToSet.overview = overview;
         taskToSet.status = "NEW";
         taskToSet.taskType = taskType.TASK.name();
         return taskToSet;
@@ -95,29 +93,27 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     }
     @Override
     public void deleteTask (Integer taskToDelete, HashMap<Integer, Task> currentTaskList) {
-        remove(currentTaskList.get(taskToDelete));
-        currentTaskList.remove(taskToDelete);
+        if (currentTaskList.containsKey(taskToDelete)) {
+            remove(currentTaskList.get(taskToDelete));
+            currentTaskList.remove(taskToDelete);
+        } else System.out.println("Такой задачи не существует");
     }
     @Override
     public void deleteAllTasks (HashMap<Integer,Task> taskListToClear) {
         taskListToClear.clear();
     }
     @Override
-    public void updateTask (Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList) {
-        System.out.println("Выполнили задачу? Y/N");
-        String command = scanner.nextLine();
-        if (command.equals("Y")){
+    public void updateTask (Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList,
+                            String completeCommand, String updateCommand, String newOverview) {
+        if (completeCommand.equals("Y") && currentTaskList.get(taskToUpdateID) != null){
             if (currentTaskList.get(taskToUpdateID).status.equals("NEW")) {
                 currentTaskList.get(taskToUpdateID).status = "DONE";
             } else {
                 System.out.println("Задача уже выполнена");
             }
         }
-        System.out.println("Задача изменилась?");
-        command = scanner.nextLine();
-        if (command.equals("Y")) {
-            System.out.println("Что делаем теперь?");
-            currentTaskList.get(taskToUpdateID).overview = scanner.nextLine();
+        if (updateCommand.equals("Y") && currentTaskList.get(taskToUpdateID) != null) {
+            currentTaskList.get(taskToUpdateID).overview = newOverview;
         }
     }
     @Override
@@ -261,9 +257,12 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                                String changeCommand) {
         int subtaskDoneCounter = 0;
 
-        if (completeCommand.equals("Y")){
-            if (currentSubtaskList.get(subtaskToUpdateID).status.equals("NEW")) {
-                currentSubtaskList.get(subtaskToUpdateID).status = "DONE";
+        if (completeCommand.equals("Y") || completeCommand.equals("P")){
+            if (currentSubtaskList.get(subtaskToUpdateID).status.equals("NEW") ||
+                    currentSubtaskList.get(subtaskToUpdateID).status.equals("IN_PROGRESS")) {
+                if (completeCommand.equals("Y")){
+                    currentSubtaskList.get(subtaskToUpdateID).status = "DONE";
+                } else currentSubtaskList.get(subtaskToUpdateID).status = "IN_PROGRESS";
                 currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "IN_PROGRESS";
                 for (Integer key : currentSubtaskList.keySet()) {
                     if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToUpdateID).parentID) {
@@ -291,8 +290,10 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     }
     @Override
     public void remove(Task task) {
-        taskList.get(task.id).previousNode.nextNode = taskList.get(task.id).nextNode;
-        taskList.get(task.id).nextNode.previousNode = taskList.get(task.id).previousNode;
+        if (taskList.get(task.id) != null) {
+            taskList.get(task.id).previousNode.nextNode = taskList.get(task.id).nextNode;
+            taskList.get(task.id).nextNode.previousNode = taskList.get(task.id).previousNode;
+        }
     }
     @Override
     public ArrayList<String> getHistory (ArrayList<String> currHistory) {

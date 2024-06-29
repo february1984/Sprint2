@@ -9,7 +9,7 @@ public class Managers {
             }
 
             @Override
-            public Task createTask(int maxId) {
+            public Task createTask(int maxId, String name, String overview) {
                 return null;
             }
 
@@ -34,7 +34,7 @@ public class Managers {
             }
 
             @Override
-            public void updateTask(Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList) {
+            public void updateTask(Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList, String completeCommand, String updateCommand, String newOverview) {
 
             }
 

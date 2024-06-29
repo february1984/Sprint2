@@ -163,12 +163,12 @@ public interface Manager {
     }
 
     void showTaskViewsHistory();
-    Task createTask(int maxId);
+    Task createTask(int maxId, String name, String overview);
     void showTask(Task task);
     void showAllTasks (HashMap<Integer,Task> taskList);
     void deleteTask (Integer taskToDelete, HashMap<Integer, Task> currentTaskList);
     void deleteAllTasks (HashMap<Integer,Task> taskListToClear);
-    void updateTask (Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList);
+    void updateTask (Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList, String completeCommand, String updateCommand, String newOverview);
     Epic createEpic (String name, String overview, int maxId);
     void showEpic(Epic epic, HashMap<Integer, Subtask> subtaskList);
     void showAllEpics(HashMap<Integer,Epic> epicList, HashMap<Integer,Subtask> subtaskList);

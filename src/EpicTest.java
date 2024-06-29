@@ -47,4 +47,13 @@ class EpicTest {
         currManager.updateSubtask(-16, testSubtaskList, testEpicList, "Y", "N");
         Assertions.assertEquals(testEpic.status, "IN_PROGRESS", "Статус эпика с одной выполненной и одной новой подзадачами неверен");
     }
+    @Test
+    void checkEpicStatusWithOneInProgressSubtask() {
+        Epic testEpic = currManager.createEpic("TestEpicName","TestEpicOverview", -20);
+        testEpicList.put(testEpic.id, testEpic);
+        Subtask testSubtask1 = currManager.createSubtask(-21, -20,testEpicList, "TestSubtaskName", "TestSubtaskOverview");
+        testSubtaskList.put(testSubtask1.id, testSubtask1);
+        currManager.updateSubtask(-21, testSubtaskList, testEpicList, "P", "N");
+        Assertions.assertEquals(testEpic.status, "IN_PROGRESS", "Статус эпика с одной выполняемой подзадачей неверен");
+    }
 }

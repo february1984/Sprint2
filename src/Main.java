@@ -29,7 +29,12 @@ public class Main {
             command = scanner.nextLine();
             switch (command) {
                 case "1" -> {
-                    Task taskToAdd = currManager.createTask(currentID);
+                    System.out.println("Заводим новую задачу:\n");
+                    System.out.println("Как назовем задачу?");
+                    String name = scanner.nextLine();
+                    System.out.println("Что будем делать?");
+                    String overview = scanner.nextLine();
+                    Task taskToAdd = currManager.createTask(currentID, name, overview);
                     taskList.put(taskToAdd.id, taskToAdd);
                     currentID++;
                 }
@@ -52,7 +57,16 @@ public class Main {
                 case "6" -> {
                     System.out.println("Какую задачу хотим обновить?");
                     String taskToUpdate = scanner.nextLine();
-                    currManager.updateTask(Integer.parseInt(taskToUpdate), taskList);
+                    System.out.println("Выполнили задачу? Y/N");
+                    String commandToComplete = scanner.nextLine();
+                    System.out.println("Задача изменилась? Y/N");
+                    String commandToUpdate = scanner.nextLine();
+                    String newOverview = "";
+                    if (commandToUpdate.equals("Y")){
+                        System.out.println("Что делаем теперь?");
+                        newOverview = scanner.nextLine();
+                    }
+                    currManager.updateTask(Integer.parseInt(taskToUpdate), taskList, commandToComplete, commandToUpdate, newOverview);
                 }
                 case "8" -> {
                     System.out.println("Заводим новый эпик:\n");
@@ -122,7 +136,7 @@ public class Main {
                 case "20" -> {
                     System.out.println("Какую подзадачу хотим обновить?");
                     String subtaskToUpdate = scanner.nextLine();
-                    System.out.println("Выполнили подзадачу? Y/N");
+                    System.out.println("Выполнили подзадачу? Y (Да)/ P (В процессе)/ N (Нет)");
                     String completeCommand = scanner.nextLine();
                     System.out.println("Задача изменилась?");
                     String changeCommand = scanner.nextLine();
