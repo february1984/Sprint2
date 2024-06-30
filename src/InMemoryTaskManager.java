@@ -34,7 +34,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
             taskList.put(taskToAdd.id,node);
             historyLength++;
             if (historyLength > 10){
-                remove(head.nextNode.task);
+                removeNode(head.nextNode.task);
                 historyLength--;
             }
         }
@@ -81,7 +81,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
             history.removeFirst();
         }
         if (taskList.containsKey(task.id)) {
-            remove(task);
+            removeNode(task);
             add(task);
         } else add(task);
     }
@@ -94,7 +94,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     @Override
     public void deleteTask (Integer taskToDelete, HashMap<Integer, Task> currentTaskList) {
         if (currentTaskList.containsKey(taskToDelete)) {
-            remove(currentTaskList.get(taskToDelete));
+            removeNode(currentTaskList.get(taskToDelete));
             currentTaskList.remove(taskToDelete);
         } else System.out.println("Такой задачи не существует");
     }
@@ -130,14 +130,14 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     public void showEpic(Epic epic, HashMap<Integer, Subtask> subtaskList) {
         System.out.println(epic.id + "," + epic.status + "," + epic.name + "," + epic.overview + "," + epic.taskType);
         if (taskList.containsKey(epic.id)) {
-            remove(epic);
+            removeNode(epic);
             add(epic);
         } else add(epic);
         for (Integer key : subtaskList.keySet()) {
             if (subtaskList.get(key).parentID == epic.id){
                 System.out.println("\t" + subtaskList.get(key).id + "," + subtaskList.get(key).status + "," + subtaskList.get(key).name + "," + subtaskList.get(key).overview);
                 if (taskList.containsKey(subtaskList.get(key).id)) {
-                    remove(subtaskList.get(key));
+                    removeNode(subtaskList.get(key));
                     add(subtaskList.get(key));
                 } else add(subtaskList.get(key));
             }
@@ -159,7 +159,10 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     public void deleteEpic (Integer epicToDelete, HashMap <Integer, Epic> epicList,
                             HashMap<Integer, Subtask> subtaskList, String subtaskIncluding) {
         ArrayList<Integer> subtasksIdToDelete = new ArrayList<>();
-        remove(epicList.get(epicToDelete));
+        epicList.remove(epicToDelete);
+        if (epicList.get(epicToDelete) != null) {
+            removeNode(epicList.get(epicToDelete));
+        }
         if (subtaskIncluding.equals("withSubtasks")) {
             for (Integer key : subtaskList.keySet()) {
                 if (subtaskList.get(key).parentID == epicToDelete) {
@@ -167,7 +170,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                 }
             }
             for (Integer id : subtasksIdToDelete) {
-                remove(subtaskList.get(id));
+                removeNode(subtaskList.get(id));
                 subtaskList.remove(id);
             }
         }
@@ -211,7 +214,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
             history.removeFirst();
         }
         if (taskList.containsKey(subtask.id)) {
-            remove(subtask);
+            removeNode(subtask);
             add(subtask);
         } else add(subtask);
     }
@@ -227,7 +230,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                                HashMap <Integer, Epic> currentEpicList) {
         int subtaskDoneCounter = 0;
         int numberOfSubtasks = 0;
-        remove(currentSubtaskList.get(subtaskToDelete));
+        removeNode(currentSubtaskList.get(subtaskToDelete));
         for (Integer key : currentSubtaskList.keySet()) {
             if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToDelete).parentID &&
                     !key.equals(subtaskToDelete)) {
@@ -289,7 +292,7 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         linkedHistory = linkLast(linkedHistory, task);
     }
     @Override
-    public void remove(Task task) {
+    public void removeNode(Task task) {
         if (taskList.get(task.id) != null) {
             taskList.get(task.id).previousNode.nextNode = taskList.get(task.id).nextNode;
             taskList.get(task.id).nextNode.previousNode = taskList.get(task.id).previousNode;

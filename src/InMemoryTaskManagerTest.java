@@ -41,4 +41,48 @@ class InMemoryTaskManagerTest {
         currManager.deleteTask(-5,testTaskList);
         Assertions.assertTrue(testTaskList.containsKey(-4));
     }
+    @Test
+    void checkTaskUpdateStandard () {
+        Task taskToAdd = currManager.createTask(-5, "Test name", "Test overview");
+        testTaskList.put(taskToAdd.id, taskToAdd);
+        currManager.updateTask(-5,testTaskList,"Y","Y","New overview");
+        Assertions.assertTrue(taskToAdd.status.equals("DONE") && taskToAdd.overview.equals("New overview"));
+    }
+    @Test
+    void checkTaskUpdateIncorrect () {
+        Task taskToAdd = currManager.createTask(-6, "Test name", "Test overview");
+        testTaskList.put(taskToAdd.id, taskToAdd);
+        currManager.updateTask(-7,testTaskList,"Y","Y","New overview");
+        Assertions.assertTrue(taskToAdd.status.equals("NEW") && taskToAdd.overview.equals("Test overview"));
+    }
+    @Test
+    void checkEpicCreation (){
+        Epic referenceEpic = new Epic();
+        referenceEpic.taskType = "EPIC";
+        referenceEpic.overview = "Epic overview";
+        referenceEpic.name = "Epic name";
+        referenceEpic.status = "NEW";
+        referenceEpic.id = -8;
+        Epic epicToAdd = currManager.createEpic("Epic name", "Epic overview", -8);
+        Assertions.assertEquals(referenceEpic, epicToAdd, "Эпик создается некорректно");
+    }
+    @Test
+    void checkEpicDeletionStandard () {
+        Epic epicToAdd = currManager.createEpic("Test name", "Test overview", -9);
+        testEpicList.put(epicToAdd.id, epicToAdd);
+        currManager.deleteEpic(epicToAdd.id,testEpicList,testSubtaskList,"withSubtasks");
+        Assertions.assertTrue(testEpicList.isEmpty());
+    }
+    @Test
+    void checkEpicDeletionEmpty () {
+        currManager.deleteEpic(-10,testEpicList,testSubtaskList,"withSubtasks");
+        Assertions.assertTrue(testEpicList.isEmpty());
+    }
+    @Test
+    void checkEpicDeletionIncorrect () {
+        Epic epicToAdd = currManager.createEpic("Test name", "Test overview", -11);
+        testEpicList.put(epicToAdd.id, epicToAdd);
+        currManager.deleteEpic(-12,testEpicList,testSubtaskList,"withSubtasks");
+        Assertions.assertTrue(testEpicList.containsKey(-11));
+    }
 }
