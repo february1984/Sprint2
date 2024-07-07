@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.*;
 
 public interface Manager {
-    Scanner scanner = new Scanner(System.in);
     enum taskType{
         TASK,
         SUBTASK,

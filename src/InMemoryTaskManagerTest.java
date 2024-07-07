@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -289,5 +290,73 @@ class InMemoryTaskManagerTest {
                 viewedTasksHistory.contains("(TASK SecName)") &&
                 !viewedTasksHistory.contains("(TASK ThirdName)") &&
                 viewedTasksHistory.size() == 2);
+    }
+    @Test
+    void checkTaskSavingStandard (){
+        Task testTask = currManager.createTask(-30,"Test name", "Test overview");
+        testTaskList.put(testTask.id, testTask);
+        try {
+            Manager.saveTaskListToFile(testTaskList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Task> loadedTestTaskList = Manager.loadTaskFromFile();
+        Assertions.assertTrue(loadedTestTaskList.containsKey(testTask.id) && loadedTestTaskList.size() == 1);
+    }
+    @Test
+    void checkTaskSavingEmpty (){
+        try {
+            Manager.saveTaskListToFile(testTaskList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Task> loadedTestTaskList = Manager.loadTaskFromFile();
+        Assertions.assertTrue(loadedTestTaskList.isEmpty());
+    }
+    @Test
+    void checkEpicSavingStandard (){
+        Epic testEpic = currManager.createEpic("Test name", "Test overview", -31);
+        testEpicList.put(testEpic.id, testEpic);
+        try {
+            Manager.saveEpicListToFile(testEpicList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Epic> loadedTestEpicList = Manager.loadEpicFromFile();
+        Assertions.assertTrue(loadedTestEpicList.containsKey(testEpic.id) && loadedTestEpicList.size() == 1);
+    }
+    @Test
+    void checkEpicSavingEmpty (){
+        try {
+            Manager.saveEpicListToFile(testEpicList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Epic> loadedTestEpicList = Manager.loadEpicFromFile();
+        Assertions.assertTrue(loadedTestEpicList.isEmpty());
+    }
+    @Test
+    void checkSubtaskSavingStandard (){
+        Epic testEpic = currManager.createEpic("Test name", "Test overview", -32);
+        Subtask testSubtask = currManager.createSubtask(-33, -32,testEpicList,"Test name", "Test overview");
+        testEpicList.put(testEpic.id, testEpic);
+        testSubtaskList.put(testSubtask.id,testSubtask);
+        try {
+            Manager.saveSubtaskListToFile(testSubtaskList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Subtask> loadedTestSubtaskList = Manager.loadSubtaskFromFile();
+        Assertions.assertTrue(loadedTestSubtaskList.containsKey(testSubtask.id) && loadedTestSubtaskList.size() == 1);
+    }
+    @Test
+    void checkSubtaskSavingEmpty (){
+        try {
+            Manager.saveSubtaskListToFile(testSubtaskList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HashMap<Integer, Subtask> loadedTestSubtaskList = Manager.loadSubtaskFromFile();
+        Assertions.assertTrue(loadedTestSubtaskList.isEmpty());
     }
 }
