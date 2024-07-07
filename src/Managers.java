@@ -64,7 +64,7 @@ public class Managers {
             }
 
             @Override
-            public void updateEpic(Integer epicToUpdateID, HashMap<Integer, Epic> epicList) {
+            public void updateEpic(Integer epicToUpdateID, HashMap<Integer, Epic> epicList, String newOverview) {
 
             }
 
@@ -95,7 +95,7 @@ public class Managers {
 
             @Override
             public void updateSubtask(Integer subtaskToUpdateID, HashMap<Integer, Subtask> currentSubtaskList,
-                                      HashMap<Integer, Epic> currentEpicList, String completeCommand, String changeCommand) {
+                                      HashMap<Integer, Epic> currentEpicList, String completeCommand, String changeCommand, String newOverview) {
 
             }
         };

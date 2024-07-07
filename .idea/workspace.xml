@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: добавлено 4 теста для проверки создания и удаления тестов. Добавлены проверки на NullPointer в методы удаления и обновления задач">
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: добавлено 6 тестов, на корректные обновление тестов, создание и удаление Эпиков.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HistoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EpicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EpicTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TaskInterface.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,15 +79,36 @@
     "JUnit.EpicTest.checkEpicStatusWithOneDoneSubtask.executor": "Run",
     "JUnit.EpicTest.checkEpicStatusWithOneInProgressSubtask.executor": "Run",
     "JUnit.EpicTest.checkEpicStatusWithZeroSubtasks.executor": "Run",
-    "JUnit.EpicTest.executor": "Debug",
+    "JUnit.EpicTest.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkAllEpicsDeletionStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkAllSubtasksDeletionStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkAllTaskDeletionStandard.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkEpicCreation.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkEpicDeletionEmpty.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkEpicDeletionIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkEpicDeletionStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkEpicUpdateIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkEpicUpdateStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkShowHistoryDuplication.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkShowHistoryEmpty.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkShowHistoryStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletion.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskCreation.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskCreationIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionByEpicDeletionStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionEmpty.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateStandard.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskCreation.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskDeletion.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskDeletionEmpty.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskDeletionIncorrect.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionStandard.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskUpdateIncorrect.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.checkTaskUpdateStandard.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -113,7 +138,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InMemoryTaskManagerTest.checkEpicDeletionIncorrect">
+  <component name="RunManager" selected="JUnit.InMemoryTaskManagerTest">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -123,51 +148,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InMemoryTaskManagerTest.checkEpicCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="checkEpicCreation" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryTaskManagerTest.checkShowHistoryDuplication" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Sprint2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="checkShowHistoryDuplication" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InMemoryTaskManagerTest.checkEpicDeletionEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkShowHistoryWithDeletion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="checkEpicDeletionEmpty" />
+      <option name="METHOD_NAME" value="checkShowHistoryWithDeletion" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InMemoryTaskManagerTest.checkEpicDeletionIncorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkShowHistoryWithDeletionLast" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="checkEpicDeletionIncorrect" />
+      <option name="METHOD_NAME" value="checkShowHistoryWithDeletionLast" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InMemoryTaskManagerTest.checkTaskCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InMemoryTaskManagerTest.checkShowHistoryWithDeletionMiddle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="checkTaskCreation" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InMemoryTaskManagerTest.checkTaskUpdateIncorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Sprint2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="checkTaskUpdateIncorrect" />
+      <option name="METHOD_NAME" value="checkShowHistoryWithDeletionMiddle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,11 +199,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkEpicDeletionIncorrect" />
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkEpicDeletionEmpty" />
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkEpicCreation" />
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskCreation" />
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkTaskUpdateIncorrect" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionLast" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionMiddle" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletion" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.checkShowHistoryDuplication" />
       </list>
     </recent_temporary>
   </component>
@@ -352,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719694408688</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: добавлено 6 тестов, на корректные обновление тестов, создание и удаление Эпиков.">
+      <option name="closed" value="true" />
+      <created>1719781311305</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1719781311305</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -391,7 +423,8 @@
     <MESSAGE value="feat: Добавить сохранение и чтение из файла, истории просмотров" />
     <MESSAGE value="refactor: для методов создания эпиков и подзадач, а также обновления подзадач, ввод данных вынесен в Main.&#10;feat: добавлено 4 теста для проверки статуса Эпиков" />
     <MESSAGE value="feat: добавлено 4 теста для проверки создания и удаления тестов. Добавлены проверки на NullPointer в методы удаления и обновления задач" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: добавлено 4 теста для проверки создания и удаления тестов. Добавлены проверки на NullPointer в методы удаления и обновления задач" />
+    <MESSAGE value="feat: добавлено 6 тестов, на корректные обновление тестов, создание и удаление Эпиков." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: добавлено 6 тестов, на корректные обновление тестов, создание и удаление Эпиков." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -403,6 +436,10 @@
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="currManager.historyLength" />
+        <watch expression="currManager.historyLength" />
+      </configuration>
       <configuration name="Application">
         <watch expression="taskList" />
         <watch expression="currentTask.overview" />

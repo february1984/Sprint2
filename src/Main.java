@@ -98,7 +98,14 @@ public class Main {
                 case "13" -> {
                     System.out.println("Какой эпик хотим обновить?");
                     String epicToUpdate = scanner.nextLine();
-                    currManager.updateEpic(Integer.parseInt(epicToUpdate), epicList);
+                    while (!epicList.containsKey(Integer.parseInt(epicToUpdate))){
+                        System.out.println("Такого эпика нет. Список доступных эпиков: " + epicList.keySet());
+                        System.out.println("Пожалуйста введите эпик снова");
+                        epicToUpdate = scanner.nextLine();
+                    }
+                    System.out.println("Что делаем теперь?");
+                    String newOverview = scanner.nextLine();
+                    currManager.updateEpic(Integer.parseInt(epicToUpdate), epicList, newOverview);
                 }
                 case "15" -> {
                     System.out.println("Подзадача какого эпика?");
@@ -134,13 +141,19 @@ public class Main {
                 }
                 case "19" -> currManager.deleteAllSubtasks(subtaskList);
                 case "20" -> {
+                    String newOverview = "Overview";
                     System.out.println("Какую подзадачу хотим обновить?");
                     String subtaskToUpdate = scanner.nextLine();
                     System.out.println("Выполнили подзадачу? Y (Да)/ P (В процессе)/ N (Нет)");
                     String completeCommand = scanner.nextLine();
                     System.out.println("Задача изменилась?");
                     String changeCommand = scanner.nextLine();
-                    currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList, completeCommand, changeCommand);
+                    if (changeCommand.equals("Y")) {
+                        System.out.println("Что делаем теперь?");
+                        newOverview = scanner.nextLine();
+                    }
+                    currManager.updateSubtask(Integer.parseInt(subtaskToUpdate), subtaskList, epicList,
+                            completeCommand, changeCommand, newOverview);
                 }
                 case "21" -> currManager.showTaskViewsHistory();
                 case "22" -> {

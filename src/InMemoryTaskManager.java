@@ -181,26 +181,26 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         subtaskListToClear.clear();
     }
     @Override
-    public void updateEpic (Integer epicToUpdateID, HashMap<Integer, Epic> epicList){
-        while (!epicList.containsKey(epicToUpdateID)){
-            System.out.println("Такого эпика нет. Список доступных эпиков: " + epicList.keySet());
-            System.out.println("Пожалуйста введите эпик снова");
-            epicToUpdateID = Integer.parseInt(scanner.nextLine());
+    public void updateEpic (Integer epicToUpdateID, HashMap<Integer, Epic> epicList, String newOverview){
+        if (epicList.containsKey(epicToUpdateID)) {
+            epicList.get(epicToUpdateID).overview = newOverview;
         }
-        System.out.println("Что делаем теперь?");
-        epicList.get(epicToUpdateID).overview = scanner.nextLine();
     }
     @Override
     public Subtask createSubtask (int maxId, int parentID, HashMap<Integer,Epic> epicList, String name, String overview){
         Subtask subtaskToSet = new Subtask();
-        subtaskToSet.id = maxId;
-        subtaskToSet.name = name;
-        subtaskToSet.overview = overview;
-        subtaskToSet.status = "NEW";
-        subtaskToSet.taskType = taskType.SUBTASK.name();
-        subtaskToSet.parentID = parentID;
-        if (epicList.get(parentID).status.equals("DONE")){
-            epicList.get(parentID).status = "IN_PROGRESS";
+        if (epicList.containsKey(parentID)) {
+            subtaskToSet.id = maxId;
+            subtaskToSet.name = name;
+            subtaskToSet.overview = overview;
+            subtaskToSet.status = "NEW";
+            subtaskToSet.taskType = taskType.SUBTASK.name();
+            subtaskToSet.parentID = parentID;
+        }
+        if (epicList.get(parentID) != null) {
+            if (epicList.get(parentID).status.equals("DONE")) {
+                epicList.get(parentID).status = "IN_PROGRESS";
+            }
         }
         return subtaskToSet;
     }
@@ -230,23 +230,25 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                                HashMap <Integer, Epic> currentEpicList) {
         int subtaskDoneCounter = 0;
         int numberOfSubtasks = 0;
-        removeNode(currentSubtaskList.get(subtaskToDelete));
-        for (Integer key : currentSubtaskList.keySet()) {
-            if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToDelete).parentID &&
-                    !key.equals(subtaskToDelete)) {
-                if (currentSubtaskList.get(key).status.equals("DONE")) {
-                    subtaskDoneCounter++;
-                    numberOfSubtasks++;
+        if (currentSubtaskList.containsKey(subtaskToDelete)) {
+            removeNode(currentSubtaskList.get(subtaskToDelete));
+            for (Integer key : currentSubtaskList.keySet()) {
+                if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToDelete).parentID &&
+                        !key.equals(subtaskToDelete)) {
+                    if (currentSubtaskList.get(key).status.equals("DONE")) {
+                        subtaskDoneCounter++;
+                        numberOfSubtasks++;
+                    }
+                    subtaskDoneCounter--;
                 }
-                subtaskDoneCounter--;
             }
+            if (subtaskDoneCounter == 0 && numberOfSubtasks != 0) {
+                currentEpicList.get(currentSubtaskList.get(subtaskToDelete).parentID).status = "DONE";
+            } else {
+                currentEpicList.get(currentSubtaskList.get(subtaskToDelete).parentID).status = "NEW";
+            }
+            currentSubtaskList.remove(subtaskToDelete);
         }
-        if (subtaskDoneCounter == 0 && numberOfSubtasks != 0){
-            currentEpicList.get(currentSubtaskList.get(subtaskToDelete).parentID).status = "DONE";
-        } else{
-            currentEpicList.get(currentSubtaskList.get(subtaskToDelete).parentID).status = "NEW";
-        }
-        currentSubtaskList.remove(subtaskToDelete);
     }
     @Override
     public void deleteAllSubtasks (HashMap<Integer,Subtask> subtaskListToClear) {
@@ -257,35 +259,36 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
                                HashMap<Integer, Subtask> currentSubtaskList,
                                HashMap <Integer, Epic> currentEpicList,
                                String completeCommand,
-                               String changeCommand) {
+                               String changeCommand,
+                               String newOverview) {
         int subtaskDoneCounter = 0;
-
-        if (completeCommand.equals("Y") || completeCommand.equals("P")){
-            if (currentSubtaskList.get(subtaskToUpdateID).status.equals("NEW") ||
-                    currentSubtaskList.get(subtaskToUpdateID).status.equals("IN_PROGRESS")) {
-                if (completeCommand.equals("Y")){
-                    currentSubtaskList.get(subtaskToUpdateID).status = "DONE";
-                } else currentSubtaskList.get(subtaskToUpdateID).status = "IN_PROGRESS";
-                currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "IN_PROGRESS";
-                for (Integer key : currentSubtaskList.keySet()) {
-                    if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToUpdateID).parentID) {
-                        if (currentSubtaskList.get(key).status.equals("DONE")) {
-                            subtaskDoneCounter++;
+        if (currentSubtaskList.containsKey(subtaskToUpdateID)) {
+            if (completeCommand.equals("Y") || completeCommand.equals("P")) {
+                if (currentSubtaskList.get(subtaskToUpdateID).status.equals("NEW") ||
+                        currentSubtaskList.get(subtaskToUpdateID).status.equals("IN_PROGRESS")) {
+                    if (completeCommand.equals("Y")) {
+                        currentSubtaskList.get(subtaskToUpdateID).status = "DONE";
+                    } else currentSubtaskList.get(subtaskToUpdateID).status = "IN_PROGRESS";
+                    currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "IN_PROGRESS";
+                    for (Integer key : currentSubtaskList.keySet()) {
+                        if (currentSubtaskList.get(key).parentID == currentSubtaskList.get(subtaskToUpdateID).parentID) {
+                            if (currentSubtaskList.get(key).status.equals("DONE")) {
+                                subtaskDoneCounter++;
+                            }
+                            subtaskDoneCounter--;
                         }
-                        subtaskDoneCounter--;
                     }
+                    if (subtaskDoneCounter == 0) {
+                        currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "DONE";
+                    }
+                } else {
+                    System.out.println("Задача уже выполнена");
                 }
-                if (subtaskDoneCounter == 0){
-                    currentEpicList.get(currentSubtaskList.get(subtaskToUpdateID).parentID).status = "DONE";
-                }
-            } else {
-                System.out.println("Задача уже выполнена");
             }
-        }
-        if (changeCommand.equals("Y")) {
-            System.out.println("Что делаем теперь?");
-            currentSubtaskList.get(subtaskToUpdateID).overview = scanner.nextLine();
-        }
+            if (changeCommand.equals("Y")) {
+                currentSubtaskList.get(subtaskToUpdateID).overview = newOverview;
+            }
+        } else System.out.println("Такой подзадачи нет");
     }
     @Override
     public void add(Task task) {

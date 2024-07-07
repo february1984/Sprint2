@@ -175,7 +175,7 @@ public interface Manager {
     void deleteEpic (Integer epicToDelete, HashMap <Integer, Epic> epicList,
                                    HashMap<Integer, Subtask> subtaskList, String subtaskIncluding);
     void deleteAllEpics (HashMap<Integer,Epic> epicListToClear, HashMap<Integer,Subtask> subtaskListToClear);
-    void updateEpic (Integer epicToUpdateID, HashMap<Integer, Epic> epicList);
+    void updateEpic (Integer epicToUpdateID, HashMap<Integer, Epic> epicList, String newOverview);
     Subtask createSubtask (int maxId, int parentID, HashMap<Integer,Epic> epicList, String name, String overview);
     void showSubtask(Subtask subtask);
     void showAllSubtasks(HashMap<Integer,Subtask> subtaskList);
@@ -185,5 +185,5 @@ public interface Manager {
     void deleteAllSubtasks (HashMap<Integer,Subtask> subtaskListToClear);
 
     void updateSubtask (Integer subtaskToUpdateID, HashMap<Integer, Subtask> currentSubtaskList,
-                                      HashMap <Integer, Epic> currentEpicList, String completeCommand, String changeCommand);
+                                      HashMap <Integer, Epic> currentEpicList, String completeCommand, String changeCommand, String newOverview);
 }

@@ -32,8 +32,8 @@ class EpicTest {
         testSubtaskList.put(testSubtask1.id, testSubtask1);
         Subtask testSubtask2 = currManager.createSubtask(-12, -10,testEpicList, "TestSubtaskName", "TestSubtaskOverview");
         testSubtaskList.put(testSubtask2.id, testSubtask2);
-        currManager.updateSubtask(-11, testSubtaskList, testEpicList, "Y", "N");
-        currManager.updateSubtask(-12, testSubtaskList, testEpicList, "Y", "N");
+        currManager.updateSubtask(-11, testSubtaskList, testEpicList, "Y", "N", "NewOverview");
+        currManager.updateSubtask(-12, testSubtaskList, testEpicList, "Y", "N", "NewOverview");
         Assertions.assertEquals(testEpic.status, "DONE", "Статус эпика с двумя выполненными подзадачами неверен");
     }
     @Test
@@ -44,7 +44,7 @@ class EpicTest {
         testSubtaskList.put(testSubtask1.id, testSubtask1);
         Subtask testSubtask2 = currManager.createSubtask(-17, -15,testEpicList, "TestSubtaskName", "TestSubtaskOverview");
         testSubtaskList.put(testSubtask2.id, testSubtask2);
-        currManager.updateSubtask(-16, testSubtaskList, testEpicList, "Y", "N");
+        currManager.updateSubtask(-16, testSubtaskList, testEpicList, "Y", "N", "NewOverview");
         Assertions.assertEquals(testEpic.status, "IN_PROGRESS", "Статус эпика с одной выполненной и одной новой подзадачами неверен");
     }
     @Test
@@ -53,7 +53,7 @@ class EpicTest {
         testEpicList.put(testEpic.id, testEpic);
         Subtask testSubtask1 = currManager.createSubtask(-21, -20,testEpicList, "TestSubtaskName", "TestSubtaskOverview");
         testSubtaskList.put(testSubtask1.id, testSubtask1);
-        currManager.updateSubtask(-21, testSubtaskList, testEpicList, "P", "N");
+        currManager.updateSubtask(-21, testSubtaskList, testEpicList, "P", "N", "NewOverview");
         Assertions.assertEquals(testEpic.status, "IN_PROGRESS", "Статус эпика с одной выполняемой подзадачей неверен");
     }
 }
