@@ -1,5 +1,10 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class InMemoryTaskManager implements Manager, HistoryManager {
     ArrayList<String> history = new ArrayList<>();
@@ -62,13 +67,15 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         }
     }
     @Override
-    public Task createTask(int maxId, String name, String overview) {
+    public Task createTask(int maxId, String name, String overview, int duration, String startTime) {
         Task taskToSet = new Task();
         taskToSet.id = maxId;
         taskToSet.name = name;
         taskToSet.overview = overview;
         taskToSet.status = "NEW";
         taskToSet.taskType = taskType.TASK.name();
+        taskToSet.startTime = startTime;
+        taskToSet.duration = duration;
         return taskToSet;
     }
     @Override
@@ -115,6 +122,12 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
         if (updateCommand.equals("Y") && currentTaskList.get(taskToUpdateID) != null) {
             currentTaskList.get(taskToUpdateID).overview = newOverview;
         }
+    }
+    @Override
+    public void getEndTime(Task task){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy:HH:mm");
+        LocalDateTime endTime = java.time.LocalDateTime.parse(task.startTime, formatter).plusHours(task.duration);
+        System.out.println(formatter.format(endTime));
     }
     @Override
     public Epic createEpic (String name, String overview, int maxId) {

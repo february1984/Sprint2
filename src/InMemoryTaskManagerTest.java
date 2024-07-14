@@ -21,19 +21,19 @@ class InMemoryTaskManagerTest {
         referenceTask.name = "Test name";
         referenceTask.status = "NEW";
         referenceTask.id = -1;
-        Task taskToAdd = currManager.createTask(-1,"Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-1,"Test name", "Test overview", 1, "07.04.2024:10:00");
         Assertions.assertEquals(referenceTask, taskToAdd, "Задача создается некорректно");
     }
     @Test
     void checkTaskDeletionStandard () {
-        Task taskToAdd = currManager.createTask(-2, "Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-2, "Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(taskToAdd.id, taskToAdd);
         currManager.deleteTask(taskToAdd.id,testTaskList);
         Assertions.assertTrue(testTaskList.isEmpty());
     }
     @Test
     void checkAllTaskDeletionStandard () {
-        Task taskToAdd = currManager.createTask(-2, "Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-2, "Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(taskToAdd.id, taskToAdd);
         currManager.deleteAllTasks(testTaskList);
         Assertions.assertTrue(testTaskList.isEmpty());
@@ -45,21 +45,21 @@ class InMemoryTaskManagerTest {
     }
     @Test
     void checkTaskDeletionIncorrect () {
-        Task taskToAdd = currManager.createTask(-4, "Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-4, "Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(taskToAdd.id, taskToAdd);
         currManager.deleteTask(-5,testTaskList);
         Assertions.assertTrue(testTaskList.containsKey(-4));
     }
     @Test
     void checkTaskUpdateStandard () {
-        Task taskToAdd = currManager.createTask(-5, "Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-5, "Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(taskToAdd.id, taskToAdd);
         currManager.updateTask(-5,testTaskList,"Y","Y","New overview");
         Assertions.assertTrue(taskToAdd.status.equals("DONE") && taskToAdd.overview.equals("New overview"));
     }
     @Test
     void checkTaskUpdateIncorrect () {
-        Task taskToAdd = currManager.createTask(-6, "Test name", "Test overview");
+        Task taskToAdd = currManager.createTask(-6, "Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(taskToAdd.id, taskToAdd);
         currManager.updateTask(-7,testTaskList,"Y","Y","New overview");
         Assertions.assertTrue(taskToAdd.status.equals("NEW") && taskToAdd.overview.equals("Test overview"));
@@ -210,8 +210,8 @@ class InMemoryTaskManagerTest {
     @Test
     void checkShowHistoryStandard(){
         ArrayList<String> viewedTasksHistory = new ArrayList<>();
-        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview");
-        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview");
+        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview", 1, "07.04.2024:10:00");
+        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview", 1, "07.04.2024:10:00");
         currManager.showTask(firstTestTask);
         currManager.showTask(secTestTask);
         viewedTasksHistory = currManager.getHistory(viewedTasksHistory);
@@ -226,8 +226,8 @@ class InMemoryTaskManagerTest {
     @Test
     void checkShowHistoryDuplication(){
         ArrayList<String> viewedTasksHistory = new ArrayList<>();
-        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview");
-        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview");
+        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview", 1, "07.04.2024:10:00");
+        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview", 1, "07.04.2024:10:00");
         currManager.showTask(firstTestTask);
         currManager.showTask(secTestTask);
         currManager.showTask(firstTestTask);
@@ -237,9 +237,9 @@ class InMemoryTaskManagerTest {
     @Test
     void checkShowHistoryWithDeletionFirst(){
         ArrayList<String> viewedTasksHistory = new ArrayList<>();
-        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview");
-        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview");
-        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview");
+        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview", 1, "07.04.2024:10:00");
+        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview", 1, "07.04.2024:10:00");
+        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(firstTestTask.id, firstTestTask);
         testTaskList.put(secTestTask.id, secTestTask);
         testTaskList.put(thirdTestTask.id, thirdTestTask);
@@ -256,9 +256,9 @@ class InMemoryTaskManagerTest {
     @Test
     void checkShowHistoryWithDeletionMiddle(){
         ArrayList<String> viewedTasksHistory = new ArrayList<>();
-        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview");
-        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview");
-        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview");
+        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview", 1, "07.04.2024:10:00");
+        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview", 1, "07.04.2024:10:00");
+        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(firstTestTask.id, firstTestTask);
         testTaskList.put(secTestTask.id, secTestTask);
         testTaskList.put(thirdTestTask.id, thirdTestTask);
@@ -275,9 +275,9 @@ class InMemoryTaskManagerTest {
     @Test
     void checkShowHistoryWithDeletionLast(){
         ArrayList<String> viewedTasksHistory = new ArrayList<>();
-        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview");
-        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview");
-        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview");
+        Task firstTestTask = currManager.createTask(-27,"FirstName", "Test overview", 1, "07.04.2024:10:00");
+        Task secTestTask = currManager.createTask(-28,"SecName", "Test overview", 1, "07.04.2024:10:00");
+        Task thirdTestTask = currManager.createTask(-29,"ThirdName", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(firstTestTask.id, firstTestTask);
         testTaskList.put(secTestTask.id, secTestTask);
         testTaskList.put(thirdTestTask.id, thirdTestTask);
@@ -293,7 +293,7 @@ class InMemoryTaskManagerTest {
     }
     @Test
     void checkTaskSavingStandard (){
-        Task testTask = currManager.createTask(-30,"Test name", "Test overview");
+        Task testTask = currManager.createTask(-30,"Test name", "Test overview", 1, "07.04.2024:10:00");
         testTaskList.put(testTask.id, testTask);
         try {
             Manager.saveTaskListToFile(testTaskList);

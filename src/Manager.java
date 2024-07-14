@@ -30,6 +30,8 @@ public interface Manager {
                     currentTask.name = currentValue[2];
                     currentTask.overview = currentValue[3];
                     currentTask.taskType = currentValue[4];
+                    currentTask.startTime = currentValue[5];
+                    currentTask.duration = Integer.parseInt(currentValue[6]);
                     taskList.put(currentTask.id, currentTask);
                 }
             }
@@ -119,7 +121,8 @@ public interface Manager {
         FileWriter writer = new FileWriter("TaskList.txt", true);
         for (Integer key : taskList.keySet()) {
             writer.write(taskList.get(key).id + "," + taskList.get(key).status + "," + taskList.get(key).name + "," +
-                    taskList.get(key).overview + "," + taskList.get(key).taskType + "\n");
+                    taskList.get(key).overview + "," + taskList.get(key).taskType + "," + taskList.get(key).startTime + "," +
+                    taskList.get(key).duration + "\n");
         }
         writer.close();
     }
@@ -162,12 +165,13 @@ public interface Manager {
     }
 
     void showTaskViewsHistory();
-    Task createTask(int maxId, String name, String overview);
+    Task createTask(int maxId, String name, String overview, int duration, String startTime);
     void showTask(Task task);
     void showAllTasks (HashMap<Integer,Task> taskList);
     void deleteTask (Integer taskToDelete, HashMap<Integer, Task> currentTaskList);
     void deleteAllTasks (HashMap<Integer,Task> taskListToClear);
     void updateTask (Integer taskToUpdateID, HashMap<Integer, Task> currentTaskList, String completeCommand, String updateCommand, String newOverview);
+    void getEndTime(Task task);
     Epic createEpic (String name, String overview, int maxId);
     void showEpic(Epic epic, HashMap<Integer, Subtask> subtaskList);
     void showAllEpics(HashMap<Integer,Epic> epicList, HashMap<Integer,Subtask> subtaskList);

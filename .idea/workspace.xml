@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавлены тесты на создание, изменение и удаление подзадач. Добавлены тесты на вывод истории просмотров.">
+    <list default="true" id="86475f8a-a8f0-45aa-9526-4050b31817ad" name="Changes" comment="feat: Добавлены тесты на сохранение и загрузку задач, эпиков и подзадач">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InMemoryTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,71 +69,71 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "JUnit.EpicTest.checkEpicStatusWithDoneSubtasks.executor": "Run",
-    "JUnit.EpicTest.checkEpicStatusWithNewSubtasks.executor": "Run",
-    "JUnit.EpicTest.checkEpicStatusWithOneDoneSubtask.executor": "Run",
-    "JUnit.EpicTest.checkEpicStatusWithOneInProgressSubtask.executor": "Run",
-    "JUnit.EpicTest.checkEpicStatusWithZeroSubtasks.executor": "Run",
-    "JUnit.EpicTest.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkAllEpicsDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkAllSubtasksDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkAllTaskDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicCreation.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicDeletionEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicDeletionIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicSavingEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicSavingStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicUpdateIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkEpicUpdateStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryDuplication.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletion.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionLast.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionMiddle.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskCreation.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskCreationIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionByEpicDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskSavingEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskSavingStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskCreation.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskDeletion.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskDeletionStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskSavingEmpty.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskSavingStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskUpdateIncorrect.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.checkTaskUpdateStandard.executor": "Run",
-    "JUnit.InMemoryTaskManagerTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JUnit.EpicTest.checkEpicStatusWithDoneSubtasks.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EpicTest.checkEpicStatusWithNewSubtasks.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EpicTest.checkEpicStatusWithOneDoneSubtask.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EpicTest.checkEpicStatusWithOneInProgressSubtask.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EpicTest.checkEpicStatusWithZeroSubtasks.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EpicTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkAllEpicsDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkAllSubtasksDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkAllTaskDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicCreation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicDeletionEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicDeletionIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicSavingEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicSavingStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicUpdateIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkEpicUpdateStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryDuplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletion.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionLast.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkShowHistoryWithDeletionMiddle.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskCreation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskCreationIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionByEpicDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskSavingEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskSavingStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkSubtaskUpdateStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskCreation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskDeletion.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskDeletionEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskDeletionIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskDeletionStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskSavingEmpty.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskSavingStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskUpdateIncorrect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.checkTaskUpdateStandard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InMemoryTaskManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Admin/IdeaProjects/Sprint2/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -141,7 +145,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InMemoryTaskManagerTest.checkSubtaskSavingEmpty">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -396,7 +400,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720310822361</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feat: Добавлены тесты на сохранение и загрузку задач, эпиков и подзадач">
+      <option name="closed" value="true" />
+      <created>1720387870252</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1720387870252</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -437,7 +449,8 @@
     <MESSAGE value="feat: добавлено 4 теста для проверки создания и удаления тестов. Добавлены проверки на NullPointer в методы удаления и обновления задач" />
     <MESSAGE value="feat: добавлено 6 тестов, на корректные обновление тестов, создание и удаление Эпиков." />
     <MESSAGE value="feat: Добавлены тесты на создание, изменение и удаление подзадач. Добавлены тесты на вывод истории просмотров." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавлены тесты на создание, изменение и удаление подзадач. Добавлены тесты на вывод истории просмотров." />
+    <MESSAGE value="feat: Добавлены тесты на сохранение и загрузку задач, эпиков и подзадач" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Добавлены тесты на сохранение и загрузку задач, эпиков и подзадач" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

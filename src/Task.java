@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Objects;
 
 public class Task {
@@ -6,6 +7,8 @@ public class Task {
     public String overview;
     public String status;
     public String taskType;
+    public int duration;
+    public String startTime;
 
     @Override
     public boolean equals(Object o) {
