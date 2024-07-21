@@ -103,6 +103,9 @@ public class Managers {
                                       HashMap<Integer, Epic> currentEpicList, String completeCommand, String changeCommand, String newOverview) {
 
             }
+            @Override
+            public void sortTaskList (Task[] tasks, int low, int high){
+            }
         };
     }
 }

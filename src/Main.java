@@ -24,7 +24,7 @@ public class Main {
                     \t\t\t==============================================================================================================
                     Подзадачу\t|| код 15\t|| код 16\t|| код 17\t\t|| код 18\t|| код 19\t\t||  код 20 \t|| Код 23\t\t\t\t\t||
                     \t\t\t==============================================================================================================
-                    \t\t\t*21 - Показать историю сессии **22 - Показать историю быстрее
+                    \t\t\t*21 - Показать историю сессии **22 - Показать историю быстрее *** 23 - Отсортировать список задач
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -66,7 +66,7 @@ public class Main {
                     System.out.println("Задача изменилась? Y/N");
                     String commandToUpdate = scanner.nextLine();
                     String newOverview = "";
-                    if (commandToUpdate.equals("Y")){
+                    if (commandToUpdate.equals("Y")) {
                         System.out.println("Что делаем теперь?");
                         newOverview = scanner.nextLine();
                     }
@@ -96,18 +96,18 @@ public class Main {
                         System.out.println("Такой задачи нет\n");
                     }
                 }
-                case "10" -> currManager.showAllEpics(epicList,subtaskList);
+                case "10" -> currManager.showAllEpics(epicList, subtaskList);
 
                 case "11" -> {
                     System.out.println("Какой эпик хотим удалить?");
                     String epicToDelete = scanner.nextLine();
                     currManager.deleteEpic(Integer.parseInt(epicToDelete), epicList, subtaskList, "withSubtasks");
                 }
-                case "12" -> currManager.deleteAllEpics(epicList,subtaskList);
+                case "12" -> currManager.deleteAllEpics(epicList, subtaskList);
                 case "13" -> {
                     System.out.println("Какой эпик хотим обновить?");
                     String epicToUpdate = scanner.nextLine();
-                    while (!epicList.containsKey(Integer.parseInt(epicToUpdate))){
+                    while (!epicList.containsKey(Integer.parseInt(epicToUpdate))) {
                         System.out.println("Такого эпика нет. Список доступных эпиков: " + epicList.keySet());
                         System.out.println("Пожалуйста введите эпик снова");
                         epicToUpdate = scanner.nextLine();
@@ -129,7 +129,7 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.println("Что будем делать?");
                     String overview = scanner.nextLine();
-                    Subtask newSubtask = currManager.createSubtask(currentID, parentID,epicList, name, overview);
+                    Subtask newSubtask = currManager.createSubtask(currentID, parentID, epicList, name, overview);
                     subtaskList.put(newSubtask.id, newSubtask);
                     currentID++;
                 }
@@ -146,7 +146,7 @@ public class Main {
                 case "18" -> {
                     System.out.println("Какую подзадачу хотим удалить?");
                     String subtaskToDelete = scanner.nextLine();
-                    currManager.deleteSubtask(Integer.parseInt(subtaskToDelete),subtaskList,epicList);
+                    currManager.deleteSubtask(Integer.parseInt(subtaskToDelete), subtaskList, epicList);
                 }
                 case "19" -> currManager.deleteAllSubtasks(subtaskList);
                 case "20" -> {
@@ -167,8 +167,15 @@ public class Main {
                 case "21" -> currManager.showTaskViewsHistory();
                 case "22" -> {
                     viewedTasksHistory = currManager.getHistory(viewedTasksHistory);
-                    for (String task : viewedTasksHistory){
+                    for (String task : viewedTasksHistory) {
                         System.out.println(task);
+                    }
+                }
+                case "23" ->{
+                    Task[] tasks = taskList.values().toArray(new Task[0]);
+                    currManager.sortTaskList(tasks, 0, taskList.size() - 1);
+                    for (Task task: tasks){
+                        System.out.println("( " + task.name + " " + task.overview + " " + task.startTime + " )");
                     }
                 }
             }

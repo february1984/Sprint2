@@ -1,10 +1,7 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class InMemoryTaskManager implements Manager, HistoryManager {
     ArrayList<String> history = new ArrayList<>();
@@ -317,5 +314,34 @@ public class InMemoryTaskManager implements Manager, HistoryManager {
     @Override
     public ArrayList<String> getHistory (ArrayList<String> currHistory) {
         return getTasks(currHistory);
+    }
+    @Override
+    public void sortTaskList (Task[] tasks, int low, int high){
+        if(low < high){
+            int pi = partition(tasks, low, high);
+            sortTaskList(tasks, low, pi-1);
+            sortTaskList(tasks, pi+1, high);
+        }
+    }
+    public static int partition(Task[] arr, int low, int high) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy:HH:mm");
+        int middle = low + (high - low) / 2;
+        Task pivot = arr[middle];
+        Task temp = arr[middle];
+        arr[middle] = arr[high];
+        arr[high] = temp;
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (java.time.LocalDateTime.parse(arr[j].startTime, formatter).isBefore(java.time.LocalDateTime.parse(pivot.startTime, formatter))) {
+                i++;
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
     }
 }

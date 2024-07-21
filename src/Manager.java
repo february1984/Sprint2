@@ -189,4 +189,5 @@ public interface Manager {
 
     void updateSubtask (Integer subtaskToUpdateID, HashMap<Integer, Subtask> currentSubtaskList,
                                       HashMap <Integer, Epic> currentEpicList, String completeCommand, String changeCommand, String newOverview);
+    void sortTaskList (Task[] tasks, int low, int high);
 }
