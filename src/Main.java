@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class Main {
         HashMap<Integer, Subtask> subtaskList = Manager.loadSubtaskFromFile();
         InMemoryTaskManager currManager = new InMemoryTaskManager();
         ArrayList<String> viewedTasksHistory = Manager.loadTaskHistoryFromFile();
+        TreeNode root = new TreeNode(taskList.get(taskList.keySet().toArray()[0]));
         int currentID = Manager.loadIdFromFile();
         Scanner scanner = new Scanner(System.in);
         String command = "Start";
@@ -24,7 +26,9 @@ public class Main {
                     \t\t\t==============================================================================================================
                     Подзадачу\t|| код 15\t|| код 16\t|| код 17\t\t|| код 18\t|| код 19\t\t||  код 20 \t|| Код 23\t\t\t\t\t||
                     \t\t\t==============================================================================================================
-                    \t\t\t*21 - Показать историю сессии **22 - Показать историю быстрее *** 23 - Отсортировать список задач
+                    \t\t\t21 - Показать историю сессии 22 - Показать историю быстрее
+                    \t\t\t23 - Быстрая сортировка задач 24 - Сохранить задачи в бинарное дерево
+                    \t\t\t25 - Вывести бинарное дерево (центрированный обход) 26 - проверить пересечение задач
                     """);
             command = scanner.nextLine();
             switch (command) {
@@ -178,6 +182,27 @@ public class Main {
                         System.out.println("( " + task.name + " " + task.overview + " " + task.startTime + " )");
                     }
                 }
+                case "24" ->{
+                    for (Task task : taskList.values()){
+                        root.addRecursive(root, task);
+                    }
+                }
+                case "25" -> root.showTheTreeRecursive(root);
+                case "26" -> {
+                    int errCounter = 0;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy:HH:mm");
+                    Task[] tasks = taskList.values().toArray(new Task[0]);
+                    currManager.sortTaskList(tasks, 0, taskList.size() - 1);
+                    for (int i = 0; i < tasks.length-1; i++){
+                        if (java.time.LocalDateTime.parse(tasks[i].startTime, formatter).plusHours(tasks[i].duration).isAfter(
+                                java.time.LocalDateTime.parse(tasks[i+1].startTime, formatter))) {
+                            System.out.println("Ошибка времени выполнения задачи " + tasks[i].name);
+                            errCounter++;
+                        }
+                    }
+                    System.out.println("Количество ошибок  = " + errCounter);
+                }
+
             }
         }
         Manager.saveTaskListToFile(taskList);
